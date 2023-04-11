@@ -2,7 +2,7 @@
 Code associated with manuscript analyzing the genomic basis of disease resistance in staghorn corals
 
 Data needed to analyze this data from scratch:
-  - the assembled genome (NCBI BioProj: PRJNA948411)
+  - the assembled genome & annotations (NCBI BioProj: PRJNA948411)
   - the *A. cervicornis* WGS reads to be used (NCBI BioProj: PRJNA950067)
   - Supplemental WGS for *A. palmata* and *A. prolifera* (NCBI BioProj: PRJNA473816)
 

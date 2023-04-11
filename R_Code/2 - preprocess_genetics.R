@@ -38,14 +38,32 @@ process_angsd <- function(genotype_file, probability_file, sample_names, cutoff)
            genotype = cbind(!!!syms(sample_names)),
            .keep = 'unused')
   
-  genotype_probabilities <- read_csv(probability_file, 
-                                     col_types = cols(.default = col_double(),
-                                                      contig = col_character(),
-                                                      ref = col_character(),
-                                                      alt = col_character())) %>%
-    mutate(locus_number = row_number(),
-           genotype_probability = cbind(!!!syms(sample_names)),
-           .keep = 'unused')
+  
+  
+  if(str_detect(probability_file, '\\*')){
+    genotype_probabilities <- list.files(path = dirname(probability_file), 
+               pattern = str_remove(probability_file, str_c(dirname(probability_file), '/')),
+               full.names = TRUE) %>%
+      map(~read_csv(.x, 
+                    col_types = cols(.default = col_double(),
+                                     contig = col_character(),
+                                     ref = col_character(),
+                                     alt = col_character()))) %>%
+      bind_rows() %>%
+      mutate(locus_number = row_number(),
+             genotype_probability = cbind(!!!syms(sample_names)),
+             .keep = 'unused')
+  } else {
+    genotype_probabilities <- read_csv(probability_file, 
+                                       col_types = cols(.default = col_double(),
+                                                        contig = col_character(),
+                                                        ref = col_character(),
+                                                        alt = col_character())) %>%
+      mutate(locus_number = row_number(),
+             genotype_probability = cbind(!!!syms(sample_names)),
+             .keep = 'unused')
+  }
+  
   
   full_join(genotypes, genotype_probabilities,
             by = c('contig', 'position', 'ref', 'alt', 'locus_number')) %>%
@@ -231,7 +249,7 @@ sample_data <- read_csv('../intermediate_files/collected_sample_metadata.csv',
 resistance_data <- read_csv('../intermediate_files/disease_resistance.csv', show_col_types = FALSE)
 
 genomic_data <- process_angsd(genotype_file = '../Data/genotypes.csv.xz',
-                              probability_file = '../Data/genotype_probabilities.csv.xz',
+                              probability_file = '../Data/genotype_probabilities_.*.csv.xz',
                               sample_names = sample_data$ID, 
                               cutoff = confidence_cutoff)
 strata(genomic_data) <- sample_data
