@@ -41,6 +41,6 @@ SNP calling requirements:
     0.05 \
     30 \
     variant_calling/repair/*fastq.gz
-    ```
+  ```
 
-## 3. 
+## 3.
