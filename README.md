@@ -8,7 +8,7 @@ Data needed to analyze this data from scratch:
 
 Can skip SNP preprocessing and calling by starting with the already identified SNPs `Data/genotypes.csv.gz` & `Data/genotype_probabilities.csv.gz`. If so skip preprocessing and SNP identifications steps.
 
-1. Preprocess Sequences
+## 1. Preprocess Sequences
   - all (bash scripts)[bash_code] are designed to run on a SLURM based HPC
   - scripts should be modified such that the `${scriptDir}` variable is assigned at the beginning of scripts to the `bash_code` directory.
   ```
@@ -22,7 +22,7 @@ Can skip SNP preprocessing and calling by starting with the already identified S
     ```
 
 
-2. Call SNPs 
+## 2. Call SNPs
 SNP calling requirements:
   - Minimum Depth = 0.33 * Number of Individuals
   - Maximum Depth = Mean Depth + 4 * Standard Deviation
