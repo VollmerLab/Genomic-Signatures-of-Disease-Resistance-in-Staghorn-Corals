@@ -1,0 +1,106 @@
+#!/bin/bash
+
+#SBATCH --job-name=genotype_pipeline
+#SBATCH --partition=short
+#SBATCH --time=1-00:00:00
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+
+#ingest inputs
+outdir=${1}
+ref_genome=${2}
+#SNP calling filters
+MINDP=${3} # Minimum depth filter - e.g. 0.33 x number of individuals - code as 0.33 here
+MAXDP=${4} # Maximum depth filter - e.g = mean depth + 4 s.d. - code as 4 (e.g. the number of standard deviations to multiply by)
+MININD=${5} # Minimum individual filter - e.g. 50% of individuals - code as 0.5 here
+MINQ=${6} # Minimum quality filter - e.g. 20
+MINMAF=${7} # Minimum minor allele frequency filter - e.g. 0.05
+MINMAPQ=${8:-20};shift 8 # Minimum mapping quality (alignment score) filter, default value is 20
+fastq_files="$@"
+
+scriptDir=/work/vollmer/software/jds_scripts
+max_array_size=400
+
+mkdir -p ${outdir}/slurm
+
+#Setup for arrays
+tmp=( ${fastq_files} )
+indir=${tmp%/*}
+sample_names=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/[\._][rR][12]\.*\..*//' | sort -u) )
+extensions=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/^.*\([\._][rR][12]\)/\1/g' | sort -u) )
+number_of_individuals=${#sample_names[@]}
+number_of_extensions=${#extensions[@]}
+number_of_samples=$((number_of_extensions * number_of_individuals))
+number_of_contigs=$(grep -c '^>.*' ${ref_genome})
+
+printf "${outdir}/%s_sorted.bam\n" "${sample_names[@]}" > ${outdir}/bam.list
+
+#Scale SNP filters
+MINDP=$(echo "scale=0 ; (${MINDP} * ${number_of_individuals})/1" | bc)
+MININD=$(echo "scale=0 ; (${MININD} * ${number_of_individuals})/1" | bc)
+
+
+#Index Reference Genome - also produces file with all contigs
+JOBID=$(sbatch \
+  --output=${outdir}/slurm/indexGenome_%j.output \
+  ${scriptDir}/indexGenome.slurm \
+    ${outdir} \
+    ${ref_genome} \
+    DNA)
+indexID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Genome Index job: ${indexID}"
+
+#Map individuals to Reference Genome - spread each individual across nodes
+JOBID=$(sbatch \
+  --dependency=afterany:${indexID} \
+  --output=${outdir}/slurm/mapGenome_%A_%a.output \
+  --array=0-$((${number_of_individuals}-1))%30 \
+  ${scriptDir}/assessMapping.slurm \
+    ${outdir} \
+    PE \
+    DNA \
+    ${fastq_files})
+mapID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Genome Mapping job: ${mapID}"
+
+#Calculate Depth statistics
+JOBID=$(sbatch \
+  --dependency=afterany:${mapID} \
+  --output=${outdir}/slurm/depthStats_%j.output \
+  ${scriptDir}/calcDepthStats.slurm \
+    ${outdir} \
+    ${outdir}/bam.list \
+    ${MINQ} \
+    ${MINMAPQ} \
+    fast)
+depthStatsID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Depth Statistics job: ${depthStatsID}"
+
+#Call SNPs/genotypes - spread contigs across nodes - have to wait until indexing is finished
+JOBID=$(sbatch \
+  --dependency=afterany:${depthStatsID} \
+  --output=${outdir}/slurm/snpCall_%A_%a.output \
+  --array=0-$((${max_array_size}-1))%30 \
+  ${scriptDir}/callSNPs.slurm \
+    ${outdir}/contig_snps \
+    ${outdir}/bam.list \
+    ${outdir}/reference.contigs \
+    ${max_array_size} \
+    ${MINDP} \
+    ${MAXDP} \
+    ${MININD} \
+    ${MINQ} \
+    ${MINMAF} \
+    ${MINMAPQ})
+snpID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted SNP calling job: ${snpID}"
+
+#Join together SNP calls from all contigs
+JOBID=$(sbatch \
+  --dependency=afterany:${snpID} \
+  --output=${outdir}/slurm/snpCallMerge_%j.output \
+  ${scriptDir}/callSNPsPost.slurm \
+    ${outdir})
+snpPostID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted SNP Merging job: ${snpPostID}"

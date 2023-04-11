@@ -43,4 +43,17 @@ SNP calling requirements:
     variant_calling/repair/*fastq.gz
   ```
 
-## 3.
+## 3. Merge metadata together
+Combine all metadata for samples into useable form using: `r_code/0 - assemble_metadata.R`
+
+## 4. Estimate Disease Resistance
+Model disease trials and estimate genotype level disease resistance using: `1 - calculate_disease_resistance.R`
+
+## 5. Preprocess Called SNPs
+Filter poorly represented SNPs and SNPs with low call confidence using: `2 - preprocess_genetics.R`
+
+## 6. Identify Genetic Population Structure
+Follow code in: `3 - genetic_structure-preLFMM.R` which include code to be used interactively on an HPC to us ANGSD with the post-filtering set of individuals and loci to identify population structure
+
+## 7. Perform Latent-Factor Mixed Model analysis for GWAS
+Run code: `4 - runLFMM.R`

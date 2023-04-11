@@ -1,0 +1,162 @@
+Sample_Name,Tube.Label,ID,Species,hapCode,mtDNA_haplo,Genotype,subregion,reefName,reefGroup,x.coord,y.coord,strata
+AC-CRF-CR_153,CRF-CF-153,CRF,Acer,29,cerv,U100,Upper Keys,Turtle Rocks,Upper A,25.283617,-80.20715,Upper Keys_CRF_Turtle Rocks
+AC-CRF-CR_154,CRF-CF-154,CRF,Acer,35,cerv,U101,Upper Keys,Turtle Rocks,Upper A,25.26645,-80.2119833,Upper Keys_CRF_Turtle Rocks
+AC-CRF-CR_156,CRF-CF-156,CRF,Acer,35,cerv,U104,Upper Keys,Carysfort Reef,Upper A,25.221083,-80.2120833,Upper Keys_CRF_Carysfort Reef
+AC-CRF-CR_157,CRF-CF-157,CRF,Acer,24,cerv,U105,Upper Keys,Carysfort Reef,Upper A,25.221933,-80.2123167,Upper Keys_CRF_Carysfort Reef
+AC-CRF-CR_158,CRF-CF-158,CRF,Acer,10,palm,U90,Upper Keys,North Dry Rocks,Upper A,25.13795,-80.2894,Upper Keys_CRF_North Dry Rocks
+AC-CRF-CR_159,CRF-CF-159,CRF,Acer,12,palm,U91,Upper Keys,Horseshoe Reef,Upper A,25.1554,-80.2871,Upper Keys_CRF_Horseshoe Reef
+AC-CRF-CR_160,CRF-CF-160,CRF,Acer,24,cerv,U92,Upper Keys,Horseshoe Reef,Upper A,25.1638,-80.2778,Upper Keys_CRF_Horseshoe Reef
+AC-CRF-CR_161,CRF-CF-161,CRF,Acer,35,cerv,U93,Upper Keys,Triple A,Upper A,25.1687,-80.26795,Upper Keys_CRF_Triple A
+AC-CRF-CR_163,CRF-CF-163,CRF,Acer,35,cerv,U95,Upper Keys,Triple A,Upper A,25.176367,-80.2547333,Upper Keys_CRF_Triple A
+AC-CRF-CR_165,CRF-CF-165,CRF,Acer,13,palm,U97,Upper Keys,Triple A,Upper A,25.1987,-80.2459167,Upper Keys_CRF_Triple A
+AC-CRF-CR_166,CRF-CF-166,CRF,Acer,28,cerv,U98,Upper Keys,Triple A,Upper A,25.202767,-80.24535,Upper Keys_CRF_Triple A
+AC-CRF-CR_167,CRF-CF-167,CRF,Acer,24,cerv,U99,Upper Keys,Turtle Rocks,Upper A,25.282867,-80.2076833,Upper Keys_CRF_Turtle Rocks
+AC-CRF-TV_10,CRF-TAV-010,CRF,Acer,10,palm,U11,Upper Keys,Tavernier Patch Reef 1,Upper B,24.987133,-80.4528833,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_11,CRF-TAV-011,CRF,Acer,12,palm,U12,Upper Keys,Tavernier Patch Reef 1,Upper B,24.9516,-80.4887,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_12,CRF-TAV-012,CRF,Acer,13,palm,U14,Upper Keys,Tavernier Patch Reef 1,Upper B,24.9507,-80.4900667,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_13,CRF-TAV-013,CRF,Acer,10,palm,U15,Upper Keys,Tavernier Patch Reef 3,Upper B,24.987683,-80.43475,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_14,CRF-TAV-014,CRF,Acer,13,palm,U16,Upper Keys,Higdons Reef,Upper A,25.141717,-80.3136833,Upper Keys_CRF_Higdons Reef
+AC-CRF-TV_15,CRF-TAV-015,CRF,Acer,5,palm,U17,Upper Keys,Molasses Trench,Upper B,25.002533,-80.4231833,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_16,CRF-TAV-016,CRF,Acer,13,palm,U18,Upper Keys,Tavernier Patch Reef 3,Upper B,24.989417,-80.4667333,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_17,CRF-TAV-017,CRF,Acer,26,cerv,U19,Upper Keys,Tavernier Patch Reef 3,Upper B,24.987867,-80.4678333,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_18,CRF-TAV-018,CRF,Acer,13,palm,U20,Upper Keys,Crocker Reef,Upper B,24.892433,-80.5452333,Upper Keys_CRF_Crocker Reef
+AC-CRF-TV_19,CRF-TAV-019,CRF,Acer,10,palm,U21,Upper Keys,Molasses Trench,Upper B,25.00275,-80.4229167,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_1,CRF-TAV-001,CRF,Acer,35,cerv,U1,Upper Keys,Plantation Key Patch Reef,Upper B,24.959033,-80.4907833,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_21,CRF-TAV-021,CRF,Acer,12,palm,U23,Upper Keys,Lower Matecumbe,Middle A,24.825433,-80.6511,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_22,CRF-TAV-022,CRF,Acer,13,palm,U24,Upper Keys,Lower Matecumbe,Middle A,24.82555,-80.6516167,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_23,CRF-TAV-023,CRF,Acer,13,palm,U25,Upper Keys,Lower Matecumbe,Middle A,24.826117,-80.6512333,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_24,CRF-TAV-024,CRF,Acer,29,cerv,U26,Upper Keys,Lower Matecumbe,Middle A,24.826117,-80.6512333,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_25,CRF-TAV-025,CRF,Acer,28,cerv,U27,Upper Keys,Plantation Key Patch Reef,Upper B,24.957033,-80.4850333,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_27,CRF-TAV-027,CRF,Acer,33,cerv,U29,Upper Keys,Tavernier Patch Reef 1,Upper B,24.994767,-80.4294667,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_28,CRF-TAV-028,CRF,Acer,13,palm,U30,Upper Keys,Tavernier Patch Reef 3,Upper B,24.988533,-80.4668,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_29,CRF-TAV-029,CRF,Acer,23,cerv,U31,Upper Keys,Tavernier Patch Reef 3,Upper B,24.989917,-80.45215,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_2,CRF-TAV-002,CRF,Acer,13,palm,U2,Upper Keys,Conch Reef,Upper B,24.947083,-80.4659,Upper Keys_CRF_Conch Reef
+AC-CRF-TV_30,CRF-TAV-030,CRF,Acer,38,cerv,U32,Upper Keys,Tavernier Patch Reef 3,Upper B,24.996917,-80.4516833,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_31,CRF-TAV-031,CRF,Acer,13,palm,U33,Upper Keys,Tavernier Patch Reef 3,Upper B,25.003583,-80.4509167,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_32,CRF-TAV-032,CRF,Acer,12,palm,U34,Upper Keys,Tavernier Patch Reef 3,Upper B,25.003067,-80.45085,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_33,CRF-TAV-033,CRF,Acer,5,palm,U35,Upper Keys,Tavernier Patch Reef 3,Upper B,25.00945,-80.4514,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_34,CRF-TAV-034,CRF,Acer,12,palm,U36,Upper Keys,White Bank,Upper B,25.040367,-80.3674167,Upper Keys_CRF_White Bank
+AC-CRF-TV_35,CRF-TAV-035,CRF,Acer,35,cerv,U37,Upper Keys,Pickles Reef,Upper B,24.9886,-80.4025667,Upper Keys_CRF_Pickles Reef
+AC-CRF-TV_37,CRF-TAV-037,CRF,Acer,27,cerv,U39,Upper Keys,Conch Reef,Upper B,24.9519,-80.4511333,Upper Keys_CRF_Conch Reef
+AC-CRF-TV_38,CRF-TAV-038,CRF,Acer,13,palm,U40,Upper Keys,Conch Reef,Upper B,24.935117,-80.4675667,Upper Keys_CRF_Conch Reef
+AC-CRF-TV_39,CRF-TAV-039,CRF,Acer,13,palm,U41,Upper Keys,Conch Reef,Upper B,24.946333,-80.4701667,Upper Keys_CRF_Conch Reef
+AC-CRF-TV_3,CRF-TAV-003,CRF,Acer,5,palm,U3,Upper Keys,Plantation Key Patch Reef,Upper B,24.9574,-80.4923833,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_40,CRF-TAV-040,CRF,Acer,29,cerv,U42,Upper Keys,Plantation Key Patch Reef,Upper B,24.9509,-80.4936167,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_41,CRF-TAV-041,CRF,Acer,26,cerv,U43,Upper Keys,Tavernier Patch Reef 1,Upper B,24.951883,-80.4916167,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_42,CRF-TAV-042,CRF,Acer,13,palm,U44,Upper Keys,Tavernier Patch Reef 3,Upper B,24.988117,-80.4637167,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_43,CRF-TAV-043,CRF,Acer,5,palm,U45,Upper Keys,Molasses Trench,Upper B,25.01775,-80.3958667,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_44,CRF-TAV-044,CRF,Acer,23,cerv,U46,Upper Keys,Molasses Trench,Upper B,25.013717,-80.415,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_45,CRF-TAV-045,CRF,Acer,13,palm,U47,Upper Keys,Tavernier Patch Reef 2,Upper B,24.994217,-80.4429667,Upper Keys_CRF_Tavernier Patch Reef 2
+AC-CRF-TV_46,CRF-TAV-046,CRF,Acer,13,palm,U48,Upper Keys,Molasses Trench,Upper B,25.01075,-80.417,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_47,CRF-TAV-047,CRF,Acer,24,cerv,U49,Upper Keys,Molasses Trench,Upper B,25.011033,-80.41225,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_49,CRF-TAV-049,CRF,Acer,13,palm,U51,Upper Keys,Plantation Key Patch Reef,Upper B,24.9816,-80.4438,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_4,CRF-TAV-004,CRF,Acer,4,palm,U4,Upper Keys,Tavernier Patch Reef 3,Upper B,25.00785,-80.44805,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_52,CRF-TAV-052,CRF,Acer,24,cerv,U54,Upper Keys,Plantation Key Patch Reef,Upper B,24.952517,-80.4887833,Upper Keys_CRF_Plantation Key Patch Reef
+AC-CRF-TV_53,CRF-TAV-053,CRF,Acer,26,cerv,U55,Upper Keys,Conch Reef,Upper B,24.9463,-80.4708,Upper Keys_CRF_Conch Reef
+AC-CRF-TV_55,CRF-TAV-055,CRF,Acer,13,palm,U57,Upper Keys,Lower Matecumbe,Middle A,24.8317,-80.64195,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_56,CRF-TAV-056,CRF,Acer,33,cerv,U58,Upper Keys,Lower Matecumbe,Middle A,24.830533,-80.6437667,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_57,CRF-TAV-057,CRF,Acer,33,cerv,U59,Upper Keys,Lower Matecumbe,Middle A,24.813117,-80.6691333,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_58,CRF-TAV-058,CRF,Acer,5,palm,U60,Upper Keys,Lower Matecumbe,Middle A,24.812933,-80.6695667,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_59,CRF-TAV-059,CRF,Acer,33,cerv,U61,Upper Keys,Higdons Reef,Upper A,25.140017,-80.3146333,Upper Keys_CRF_Higdons Reef
+AC-CRF-TV_5,CRF-TAV-005,CRF,Acer,12,palm,U5,Upper Keys,Tavernier Patch Reef 3,Upper B,24.988467,-80.4498833,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_60,CRF-TAV-060,CRF,Acer,10,palm,U62,Upper Keys,North Dry Rocks,Upper A,25.1356,-80.2897333,Upper Keys_CRF_North Dry Rocks
+AC-CRF-TV_61,CRF-TAV-061,CRF,Acer,10,palm,U63,Upper Keys,North Dry Rocks,Upper A,25.12995,-80.2852333,Upper Keys_CRF_North Dry Rocks
+AC-CRF-TV_62,CRF-TAV-062,CRF,Acer,12,palm,U64,Upper Keys,Horseshoe Reef,Upper A,25.139833,-80.29525,Upper Keys_CRF_Horseshoe Reef
+AC-CRF-TV_63,CRF-TAV-063,CRF,Acer,11,palm,U65,Upper Keys,North Dry Rocks,Upper A,25.12715,-80.29455,Upper Keys_CRF_North Dry Rocks
+AC-CRF-TV_64,CRF-TAV-064,CRF,Acer,13,palm,U66,Upper Keys,Tavernier Patch Reef 1,Upper B,24.969067,-80.43575,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_65,CRF-TAV-065,CRF,Acer,12,palm,U67,Upper Keys,Lower Matecumbe,Middle A,24.80205,-80.6673667,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_67,CRF-TAV-067,CRF,Acer,13,palm,U69,Upper Keys,Lower Matecumbe,Middle A,24.80255,-80.6524,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_68,CRF-TAV-068,CRF,Acer,13,palm,U70,Upper Keys,Molasses Trench,Upper B,25.002117,-80.4011333,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_69,CRF-TAV-069,CRF,Acer,12,palm,U71,Upper Keys,Higdons Reef,Upper A,25.134383,-80.30245,Upper Keys_CRF_Higdons Reef
+AC-CRF-TV_6,CRF-TAV-006,CRF,Acer,13,palm,U6,Upper Keys,Tavernier Patch Reef 3,Upper B,24.9874,-80.4519167,Upper Keys_CRF_Tavernier Patch Reef 3
+AC-CRF-TV_70,CRF-TAV-070,CRF,Acer,24,cerv,U72,Upper Keys,North Dry Rocks,Upper A,25.133717,-80.2843833,Upper Keys_CRF_North Dry Rocks
+AC-CRF-TV_71,CRF-TAV-071,CRF,Acer,12,palm,U73,Upper Keys,Molasses Trench,Upper B,25.014683,-80.4169167,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_73,CRF-TAV-073,CRF,Acer,21,cerv,U75,Upper Keys,Lower Matecumbe,Middle A,24.813617,-80.6669667,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_74,CRF-TAV-074,CRF,Acer,12,palm,U76,Upper Keys,Lower Matecumbe,Middle A,24.821633,-80.6560833,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_75,CRF-TAV-075,CRF,Acer,13,palm,U77,Upper Keys,Lower Matecumbe,Middle A,24.813067,-80.6693333,Upper Keys_CRF_Lower Matecumbe
+AC-CRF-TV_76,CRF-TAV-076,CRF,Acer,12,palm,U78,Upper Keys,Molasses Trench,Upper B,25.0183,-80.43995,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_77,CRF-TAV-077,CRF,Acer,13,palm,U79,Upper Keys,Horseshoe Reef,Upper A,25.13985,-80.2945833,Upper Keys_CRF_Horseshoe Reef
+AC-CRF-TV_78,CRF-TAV-078,CRF,Acer,13,palm,U80,Upper Keys,Shallow patch reef near U10,Upper B,25.0208,-80.40085,Upper Keys_CRF_Shallow patch reef near U10
+AC-CRF-TV_79,CRF-TAV-079,CRF,Acer,33,cerv,M1,Middle Keys,East Turtle Shoal,Middle B,24.721683,-80.9277833,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_7,CRF-TAV-007,CRF,Acer,35,cerv,U7,Upper Keys,Molasses Trench,Upper B,25.00955,-80.4149667,Upper Keys_CRF_Molasses Trench
+AC-CRF-TV_80,CRF-TAV-080,CRF,Acer,27,cerv,M2,Middle Keys,East Turtle Shoal,Middle B,24.72015,-80.92875,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_81,CRF-TAV-081,CRF,Acer,12,palm,M3,Middle Keys,East Turtle Shoal,Middle B,24.71335,-80.9447833,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_82,CRF-TAV-082,CRF,Acer,11,palm,M5,Middle Keys,East Turtle Shoal,Middle B,24.711783,-80.9459667,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_83,CRF-TAV-083,CRF,Acer,13,palm,M6,Middle Keys,East Turtle Shoal,Middle B,24.710817,-80.948,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_84,CRF-TAV-084,CRF,Acer,33,cerv,M7,Middle Keys,East Turtle Shoal,Middle B,24.71845,-80.9307833,Middle Keys_CRF_East Turtle Shoal
+AC-CRF-TV_85,CRF-TAV-085,CRF,Acer,35,cerv,M10,Middle Keys,West Turtle Shoal,Middle B,24.692317,-80.97575,Middle Keys_CRF_West Turtle Shoal
+AC-CRF-TV_86,CRF-TAV-086,CRF,Acer,12,palm,K1,Upper Keys,Live Rock Farm,Upper B,24.9822,-80.4363,Upper Keys_CRF_Live Rock Farm
+AC-CRF-TV_87,CRF-TAV-087,CRF,Acer,13,palm,K2,Upper Keys,Live Rock Farm,Upper B,24.9822,-80.4363,Upper Keys_CRF_Live Rock Farm
+AC-CRF-TV_8,CRF-TAV-008,CRF,Acer,5,palm,U8,Upper Keys,Tavernier Patch Reef 1,Upper B,24.98025,-80.4427333,Upper Keys_CRF_Tavernier Patch Reef 1
+AC-CRF-TV_90,CRF-TAV-090,CRF,Acer,24,cerv,KW15,Lower Keys,Key West Patch Reef,Lower,24.5005,-81.7416833,Lower Keys_CRF_Key West Patch Reef
+AC-CRF-TV_91,CRF-TAV-091,CRF,Acer,13,palm,KW13,Lower Keys,Key West Patch Reef,Lower,24.473233,-81.7641,Lower Keys_CRF_Key West Patch Reef
+AC-CRF-TV_92,CRF-TAV-092,CRF,Acer,5,palm,KW5,Lower Keys,Key West Patch Reef,Lower,24.499083,-81.75905,Lower Keys_CRF_Key West Patch Reef
+AC-CRF-TV_93,CRF-TAV-093,CRF,Acer,4,palm,B8,Upper Keys,Broward County,Upper A,26.057167,-80.1056,Upper Keys_CRF_Broward County
+AC-CRF-TV_94,CRF-TAV-094,CRF,Acer,13,palm,B9,Upper Keys,Broward County,Upper A,26.024933,-80.10415,Upper Keys_CRF_Broward County
+AC-CRF-TV_95,CRF-TAV-095,CRF,Acer,13,palm,B10,Upper Keys,Broward County,Upper A,25.9891,-80.1091667,Upper Keys_CRF_Broward County
+AC-CRF-TV_9,CRF-TAV-009,CRF,Acer,13,palm,U9,Upper Keys,Plantation Key Patch Reef,Upper B,24.942967,-80.4965167,Upper Keys_CRF_Plantation Key Patch Reef
+AC-FWC-LK_18,FWC-MAR-18,FWC,Acer,11,palm,FM20,Middle Keys,Long Key,Middle A,24.77885,-80.7349,Middle Keys_FWC_Long Key
+AC-FWC-LK_19,FWC-MAR-19,FWC,Acer,11,palm,FM21,Middle Keys,Long Key,Middle A,24.7763,-80.736517,Middle Keys_FWC_Long Key
+AC-FWC-LK_25,FWC-MAR-25,FWC,Acer,13,palm,FM25,Middle Keys,Delta Shoal,Middle B,24.632383,-81.088967,Middle Keys_FWC_Delta Shoal
+AC-FWC-MR_12,FWC_MAR_12,FWC,Acer,24,cerv,FM12,Middle Keys,Delta Shoal,Middle B,24.63965,-81.0662,Middle Keys_FWC_Delta Shoal
+AC-FWC-MR_14,FWC-MAR-14,FWC,Acer,13,palm,FM14,Middle Keys,Jeff's Patch,Middle B,24.697567,-80.958517,Middle Keys_FWC_Jeff's Patch
+AC-FWC-MR_1,FWC_MAR_1,FWC,Acer,13,palm,FM1,Middle Keys,Jeff's Patch,Middle B,24.698,-80.9581,Middle Keys_FWC_Jeff's Patch
+AC-FWC-MR_20,FWC-MAR-20,FWC,Acer,35,cerv,FM23,Middle Keys,Long Key,Middle A,24.77885,-80.7349,Middle Keys_FWC_Long Key
+AC-FWC-MR_21,FWC-MAR-21,FWC,Acer,12,palm,FM18,Middle Keys,Long Key,Middle A,24.75825,-80.765983,Middle Keys_FWC_Long Key
+AC-FWC-MR_23,FWC-MAR-23,FWC,Acer,13,palm,FM19,Middle Keys,Long Key,Middle A,24.75845,-80.765817,Middle Keys_FWC_Long Key
+AC-FWC-MR_2,FWC_MAR_2,FWC,Acer,13,palm,FM2,Middle Keys,Jeff's Patch,Middle B,24.696,-80.9582,Middle Keys_FWC_Jeff's Patch
+AC-FWC-MR_3,FWC_MAR_3,FWC,Acer,12,palm,FM3,Middle Keys,Jeff's Patch,Middle B,24.697,-80.9583,Middle Keys_FWC_Jeff's Patch
+AC-FWC-MR_4,FWC_MAR_4,FWC,Acer,29,cerv,FM4,Middle Keys,East Washerwoman Shoal,Middle B,24.664267,-81.07655,Middle Keys_FWC_East Washerwoman Shoal
+AC-FWC-MR_5,FWC_MAR_5,FWC,Acer,12,palm,FM5,Middle Keys,East Turtle Shoal,Middle B,24.702167,-80.938667,Middle Keys_FWC_East Turtle Shoal
+AC-FWC-MR_6,FWC_MAR_6,FWC,Acer,13,palm,FM6,Middle Keys,East Turtle Shoal,Middle B,24.702167,-80.938667,Middle Keys_FWC_East Turtle Shoal
+AC-FWC-MR_7,FWC_MAR_7,FWC,Acer,29,cerv,FM7,Middle Keys,Jeff's Patch,Middle B,24.697667,-80.9581,Middle Keys_FWC_Jeff's Patch
+AC-FWC-MR_9,FWC_MAR_9,FWC,Acer,29,cerv,FM9,Middle Keys,East Washerwoman Shoal,Middle B,24.664267,-81.07655,Middle Keys_FWC_East Washerwoman Shoal
+AC-MOTE_10,AC_M10,MOTE,Acer,27,cerv,C1083,Lower Keys,MOTE,Lower,24.61515,-81.37917,Lower Keys_MOTE_MOTE
+AC-MOTE_11,AC_M11,MOTE,Acer,24,cerv,C1365,Lower Keys,MOTE,Lower,24.59592,-81.37162,Lower Keys_MOTE_MOTE
+AC-MOTE_12,AC_M12,MOTE,Acer,13,palm,C1191,Lower Keys,MOTE,Lower,24.62167,-81.36313,Lower Keys_MOTE_MOTE
+AC-MOTE_13,AC_M13,MOTE,Acer,13,palm,C1377,Lower Keys,MOTE,Lower,24.52171667,-81.57675,Lower Keys_MOTE_MOTE
+AC-MOTE_14,AC_M14,MOTE,Acer,24,cerv,C1369,Lower Keys,MOTE,Lower,24.5477,-81.45696,Lower Keys_MOTE_MOTE
+AC-MOTE_15,AC_M15,MOTE,Acer,13,palm,C1363,Lower Keys,MOTE,Lower,24.53865,-81.44358,Lower Keys_MOTE_MOTE
+AC-MOTE_16,AC_M16,MOTE,Acer,32,cerv,C1368,Lower Keys,MOTE,Lower,24.5615,-81.40788,Lower Keys_MOTE_MOTE
+AC-MOTE_17,AC_M17,MOTE,Acer,11,palm,C1378,Lower Keys,MOTE,Lower,24.56306,-81.40063,Lower Keys_MOTE_MOTE
+AC-MOTE_18,AC_M18,MOTE,Acer,10,palm, C1374 ,Lower Keys,MOTE,Lower,24.5532,-81.43758333,Lower Keys_MOTE_MOTE
+AC-MOTE_1,AC_M1,MOTE,Acer,13,palm,C1153,Lower Keys,MOTE,Lower,24.56937,-81.33028,Lower Keys_MOTE_MOTE
+AC-MOTE_20,AC_M20,MOTE,Acer,4,palm,C1505,Lower Keys,MOTE,Lower,24.5686,-81.3265,Lower Keys_MOTE_MOTE
+AC-MOTE_21,AC_M21,MOTE,Acer,13,palm, C1459 ,Lower Keys,MOTE,Lower,24.5686,-81.3265,Lower Keys_MOTE_MOTE
+AC-MOTE_22,AC_M22,MOTE,Acer,24,cerv,C1507,Lower Keys,MOTE,Lower,24.5608,-81.50143333,Lower Keys_MOTE_MOTE
+AC-MOTE_23,AC_M23,MOTE,Acer,13,palm,C1376,Lower Keys,MOTE,Lower,24.54835,-81.5332,Lower Keys_MOTE_MOTE
+AC-MOTE_24,AC_M24,MOTE,Acer,24,cerv,C1166,Lower Keys,MOTE,Lower,24.5215,-81.5769,Lower Keys_MOTE_MOTE
+AC-MOTE_25,AC_M25,MOTE,Acer,5,palm, C1170 ,Lower Keys,MOTE,Lower,24.54854167,-81.53308333,Lower Keys_MOTE_MOTE
+AC-MOTE_26,AC_M26,MOTE,Acer,35,cerv, C1460 ,Lower Keys,MOTE,Lower,24.52735,-81.49895,Lower Keys_MOTE_MOTE
+AC-MOTE_27,AC_M27,MOTE,Acer,29,cerv, C1461 ,Lower Keys,MOTE,Lower,24.55903333,-81.41293333,Lower Keys_MOTE_MOTE
+AC-MOTE_28,AC_M28,MOTE,Acer,24,cerv,C1261,Lower Keys,MOTE,Lower,24.55913333,-81.41338333,Lower Keys_MOTE_MOTE
+AC-MOTE_29,AC_M29,MOTE,Acer,33,cerv,C1510,Lower Keys,MOTE,Lower,24.55911667,-81.41356667,Lower Keys_MOTE_MOTE
+AC-MOTE_2,AC_M2,MOTE,Acer,33,cerv,C1154,Lower Keys,MOTE,Lower,24.56832,-81.33357,Lower Keys_MOTE_MOTE
+AC-MOTE_30,AC_M30,MOTE,Acer,22,cerv,C1511,Lower Keys,MOTE,Lower,24.55948333,-81.41321667,Lower Keys_MOTE_MOTE
+AC-MOTE_31,AC_M31,MOTE,Acer,11,palm, C1462 ,Lower Keys,MOTE,Lower,24.52328333,-81.53571667,Lower Keys_MOTE_MOTE
+AC-MOTE_32,AC_M32,MOTE,Acer,5,palm, C1279 ,Lower Keys,MOTE,Lower,24.573,-81.33149,Lower Keys_MOTE_MOTE
+AC-MOTE_33,AC_M33,MOTE,Acer,24,cerv,NA,Lower Keys,MOTE,Lower,24.52983,-81.64069,Lower Keys_MOTE_MOTE
+AC-MOTE_34,AC_M34,MOTE,Acer,24,cerv,NA,Lower Keys,MOTE,Lower,24.52983,-81.64069,Lower Keys_MOTE_MOTE
+AC-MOTE_35,AC_M35,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.55717,-81.51013,Lower Keys_MOTE_MOTE
+AC-MOTE_36,AC_M36,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.55717,-81.51013,Lower Keys_MOTE_MOTE
+AC-MOTE_37,AC_M37,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.5401,-81.44882,Lower Keys_MOTE_MOTE
+AC-MOTE_38,AC_M38,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.52658,-81.50102,Lower Keys_MOTE_MOTE
+AC-MOTE_39,AC_M39,MOTE,Acer,11,palm,NA,Lower Keys,MOTE,Lower,24.52999,-81.48959,Lower Keys_MOTE_MOTE
+AC-MOTE_3,AC_M3,MOTE,Acer,5,palm,C1155,Lower Keys,MOTE,Lower,24.56307,-81.401,Lower Keys_MOTE_MOTE
+AC-MOTE_40,AC_M40,MOTE,Acer,11,palm,NA,Lower Keys,MOTE,Lower,24.52999,-81.48959,Lower Keys_MOTE_MOTE
+AC-MOTE_41,AC_M41,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.5264,-81.50517,Lower Keys_MOTE_MOTE
+AC-MOTE_42,AC_M42,MOTE,Acer,12,palm,NA,Lower Keys,MOTE,Lower,24.5264,-81.50517,Lower Keys_MOTE_MOTE
+AC-MOTE_43,AC_M43,MOTE,Acer,24,cerv,NA,Lower Keys,MOTE,Lower,24.52815,-81.49558,Lower Keys_MOTE_MOTE
+AC-MOTE_44,AC_M44,MOTE,Acer,4,palm,NA,Lower Keys,MOTE,Lower,24.52762,-81.49719,Lower Keys_MOTE_MOTE
+AC-MOTE_45,AC_M45,MOTE,Acer,4,palm,NA,Lower Keys,MOTE,Lower,24.52762,-81.49719,Lower Keys_MOTE_MOTE
+AC-MOTE_46,AC_M46,MOTE,Acer,12,palm,NA,Lower Keys,MOTE,Lower,24.54129,-81.44031,Lower Keys_MOTE_MOTE
+AC-MOTE_47,AC_M47,MOTE,Acer,12,palm,NA,Lower Keys,MOTE,Lower,24.54129,-81.44031,Lower Keys_MOTE_MOTE
+AC-MOTE_48,AC_M48,MOTE,Acer,24,cerv,NA,Lower Keys,MOTE,Lower,24.50943,-81.62402,Lower Keys_MOTE_MOTE
+AC-MOTE_4,AC_M4,MOTE,Acer,33,cerv,C1156,Lower Keys,MOTE,Lower,24.56935,-81.38168,Lower Keys_MOTE_MOTE
+AC-MOTE_50,AC_M50,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.51766,-81.5441,Lower Keys_MOTE_MOTE
+AC-MOTE_51,AC_M51,MOTE,Acer,13,palm,NA,Lower Keys,MOTE,Lower,24.51766,-81.5441,Lower Keys_MOTE_MOTE
+AC-MOTE_5,AC_M5,MOTE,Acer,35,cerv,C1157,Lower Keys,MOTE,Lower,24.52257,-81.51978,Lower Keys_MOTE_MOTE
+AC-MOTE_6,AC_M6,MOTE,Acer,4,palm,C1158,Lower Keys,MOTE,Lower,24.52298,-81.52043,Lower Keys_MOTE_MOTE
+AC-MOTE_7,AC_M7,MOTE,Acer,38,cerv,C1159,Lower Keys,MOTE,Lower,24.56038,-81.50137,Lower Keys_MOTE_MOTE
+AC-MOTE_8,AC_M8,MOTE,Acer,33,cerv,C1160,Lower Keys,MOTE,Lower,24.58353,-81.43298,Lower Keys_MOTE_MOTE
+AC-MOTE_9,AC_M9,MOTE,Acer,12,palm,C1161,Lower Keys,MOTE,Lower,24.6144,-81.37895,Lower Keys_MOTE_MOTE

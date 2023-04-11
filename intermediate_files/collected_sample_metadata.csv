@@ -1,0 +1,171 @@
+ID,gen_id,data_origin,species,location,reef,lat,lon
+Ac_FL_B10,B10,vollmer,Ac,Florida,Upper Keys-Broward County,25.9891,-80.1091667
+Ac_FL_B8,B8,vollmer,Ac,Florida,Upper Keys-Broward County,26.057167,-80.1056
+Ac_FL_K1,K1,vollmer,Ac,Florida,Upper Keys-Live Rock Farm,24.9822,-80.4363
+Ac_FL_K2,K2,vollmer,Ac,Florida,Upper Keys-Live Rock Farm,24.9822,-80.4363
+Ac_FL_KW15,KW15,vollmer,Ac,Florida,Lower Keys-Key West Patch Reef,24.5005,-81.7416833
+Ac_FL_M10,M10,vollmer,Ac,Florida,Middle Keys-West Turtle Shoal,24.692317,-80.97575
+Ac_FL_M1,M1,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.721683,-80.9277833
+Ac_FL_M2,M2,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.72015,-80.92875
+Ac_FL_M3,M3,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.71335,-80.9447833
+Ac_FL_M5,M5,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.711783,-80.9459667
+Ac_FL_M6,M6,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.710817,-80.948
+Ac_FL_M7,M7,vollmer,Ac,Florida,Middle Keys-East Turtle Shoal,24.71845,-80.9307833
+Ac_FL_U100,U100,vollmer,Ac,Florida,Upper Keys-Turtle Rocks,25.283617,-80.20715
+Ac_FL_U11,U11,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 1,24.987133,-80.4528833
+Ac_FL_U14,U14,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 1,24.9507,-80.4900667
+Ac_FL_U15,U15,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,24.987683,-80.43475
+Ac_FL_U17,U17,vollmer,Ac,Florida,Upper Keys-Molasses Trench,25.002533,-80.4231833
+Ac_FL_U19,U19,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,24.987867,-80.4678333
+Ac_FL_U20,U20,vollmer,Ac,Florida,Upper Keys-Crocker Reef,24.892433,-80.5452333
+Ac_FL_U31,U31,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,24.989917,-80.45215
+Ac_FL_U33,U33,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,25.003583,-80.4509167
+Ac_FL_U35,U35,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,25.00945,-80.4514
+Ac_FL_U37,U37,vollmer,Ac,Florida,Upper Keys-Pickles Reef,24.9886,-80.4025667
+Ac_FL_U39,U39,vollmer,Ac,Florida,Upper Keys-Conch Reef,24.9519,-80.4511333
+Ac_FL_U3,U3,vollmer,Ac,Florida,Upper Keys-Plantation Key Patch Reef,24.9574,-80.4923833
+Ac_FL_U41,U41,vollmer,Ac,Florida,Upper Keys-Conch Reef,24.946333,-80.4701667
+Ac_FL_U42,U42,vollmer,Ac,Florida,Upper Keys-Plantation Key Patch Reef,24.9509,-80.4936167
+Ac_FL_U43,U43,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 1,24.951883,-80.4916167
+Ac_FL_U44,U44,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,24.988117,-80.4637167
+Ac_FL_U46,U46,vollmer,Ac,Florida,Upper Keys-Molasses Trench,25.013717,-80.415
+Ac_FL_U47,U47,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 2,24.994217,-80.4429667
+Ac_FL_U4,U4,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,25.00785,-80.44805
+Ac_FL_U55,U55,vollmer,Ac,Florida,Upper Keys-Conch Reef,24.9463,-80.4708
+Ac_FL_U58,U58,vollmer,Ac,Florida,Upper Keys-Lower Matecumbe,24.830533,-80.6437667
+Ac_FL_U59,U59,vollmer,Ac,Florida,Upper Keys-Lower Matecumbe,24.813117,-80.6691333
+Ac_FL_U5,U5,vollmer,Ac,Florida,Upper Keys-Tavernier Patch Reef 3,24.988467,-80.4498833
+Ac_FL_U62,U62,vollmer,Ac,Florida,Upper Keys-North Dry Rocks,25.1356,-80.2897333
+Ac_FL_U63,U63,vollmer,Ac,Florida,Upper Keys-North Dry Rocks,25.12995,-80.2852333
+Ac_FL_U65,U65,vollmer,Ac,Florida,Upper Keys-North Dry Rocks,25.12715,-80.29455
+Ac_FL_U67,U67,vollmer,Ac,Florida,Upper Keys-Lower Matecumbe,24.80205,-80.6673667
+Ac_FL_U69,U69,vollmer,Ac,Florida,Upper Keys-Lower Matecumbe,24.80255,-80.6524
+Ac_FL_U71,U71,vollmer,Ac,Florida,Upper Keys-Higdons Reef,25.134383,-80.30245
+Ac_FL_U72,U72,vollmer,Ac,Florida,Upper Keys-North Dry Rocks,25.133717,-80.2843833
+Ac_FL_U75,U75,vollmer,Ac,Florida,Upper Keys-Lower Matecumbe,24.813617,-80.6669667
+Ac_FL_U91,U91,vollmer,Ac,Florida,Upper Keys-Horseshoe Reef,25.1554,-80.2871
+Ac_FL_U93,U93,vollmer,Ac,Florida,Upper Keys-Triple A,25.1687,-80.26795
+Ac_FL_U98,U98,vollmer,Ac,Florida,Upper Keys-Triple A,25.202767,-80.24535
+Ac_FL_U9,U9,vollmer,Ac,Florida,Upper Keys-Plantation Key Patch Reef,24.942967,-80.4965167
+Ac_PA_CK140,CK140,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK1410,CK1410,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK141,CK141,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK142,CK142,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK143,CK143,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK144,CK144,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK145,CK145,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK146,CK146,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK147,CK147,vollmer,Ac,Panama,CK14,9.253966666666667,-82.12595
+Ac_PA_CK410,CK410,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK41,CK41,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK42,CK42,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK43,CK43,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK44,CK44,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK45,CK45,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK46,CK46,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK47,CK47,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK48,CK48,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_CK49,CK49,vollmer,Ac,Panama,CK4,9.258616666666667,-82.12708333333333
+Ac_PA_HS10,HS10,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS1,HS1,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS2,HS2,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS3,HS3,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS4,HS4,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS5,HS5,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS6,HS6,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS7,HS7,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS8,HS8,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_HS9,HS9,vollmer,Ac,Panama,HS,9.27955,-82.11548333333333
+Ac_PA_SR10,SR10,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR1,SR1,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR2,SR2,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR3,SR3,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR4,SR4,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR5,SR5,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR6,SR6,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR7,SR7,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR8,SR8,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_SR9,SR9,vollmer,Ac,Panama,SR,9.254566666666667,-82.12718333333333
+Ac_PA_Tet1,Tet1,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet2,Tet2,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet3,Tet3,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet4,Tet4,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet5,Tet5,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet6,Tet6,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet7,Tet7,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet8,Tet8,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+Ac_PA_Tet9,Tet9,vollmer,Ac,Panama,Tet,9.276316666666666,-82.10113333333334
+baum_acerv11_SRR7235989,SRR7235989,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv12_SRR7235990,SRR7235990,baum,Ac,Florida,NA,NA,NA
+baum_acerv16_SRR7235991,SRR7235991,baum,Ac,Florida,NA,NA,NA
+baum_acerv19_SRR7235992,SRR7235992,baum,Ac,Florida,NA,NA,NA
+baum_acerv1_SRR7236032,SRR7236032,baum,Ac,Belize,NA,NA,NA
+baum_acerv21_SRR7235993,SRR7235993,baum,Ac,Florida,NA,NA,NA
+baum_acerv22_SRR7235994,SRR7235994,baum,Ac,Florida,NA,NA,NA
+baum_acerv26_SRR7235996,SRR7235996,baum,Ac,Curacao,NA,NA,NA
+baum_acerv29_SRR7235998,SRR7235998,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv30_SRR7235999,SRR7235999,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv48_SRR7236037,SRR7236037,baum,Ac,Curacao,NA,NA,NA
+baum_acerv50_SRR7236036,SRR7236036,baum,Ac,Curacao,NA,NA,NA
+baum_acerv53_SRR7236034,SRR7236034,baum,Ac,Belize,NA,NA,NA
+baum_acerv54_SRR7236029,SRR7236029,baum,Ac,Curacao,NA,NA,NA
+baum_acerv55_SRR7236033,SRR7236033,baum,Ac,Belize,NA,NA,NA
+baum_acerv5_SRR7236030,SRR7236030,baum,Ac,Curacao,NA,NA,NA
+baum_acerv60_SRR7236028,SRR7236028,baum,Ac,Belize,NA,NA,NA
+baum_acerv62_SRR7236027,SRR7236027,baum,Ac,Belize,NA,NA,NA
+baum_acerv6_SRR12363324,SRR12363324,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv72_SRR7236022,SRR7236022,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv73_SRR7236021,SRR7236021,baum,Ac,Virgin Islands,NA,NA,NA
+baum_acerv8_SRR7236031,SRR7236031,baum,Ac,Belize,NA,NA,NA
+baum_apalm10_SRR7235988,SRR7235988,baum,Apa,Curacao,NA,NA,NA
+baum_apalm20_SRR12363330,SRR12363330,baum,Apa,Curacao,NA,NA,NA
+baum_apalm23_SRR12363331,SRR12363331,baum,Apa,Curacao,NA,NA,NA
+baum_apalm24_SRR12363332,SRR12363332,baum,Apa,Curacao,NA,NA,NA
+baum_apalm2_SRR7235987,SRR7235987,baum,Apa,Curacao,NA,NA,NA
+baum_apalm35_SRR7235979,SRR7235979,baum,Apa,Florida,NA,NA,NA
+baum_apalm36_SRR7236001,SRR7236001,baum,Apa,Florida,NA,NA,NA
+baum_apalm37_SRR7235981,SRR7235981,baum,Apa,Curacao,NA,NA,NA
+baum_apalm38_SRR7236003,SRR7236003,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm39_SRR7235980,SRR7235980,baum,Apa,Florida,NA,NA,NA
+baum_apalm3_SRR7235986,SRR7235986,baum,Apa,Curacao,NA,NA,NA
+baum_apalm40_SRR7236002,SRR7236002,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm41_SRR7235982,SRR7235982,baum,Apa,Curacao,NA,NA,NA
+baum_apalm45_SRR7235984,SRR7235984,baum,Apa,Curacao,NA,NA,NA
+baum_apalm46_SRR7236008,SRR7236008,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm49_SRR7236007,SRR7236007,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm51_SRR7236009,SRR7236009,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm56_SRR7236010,SRR7236010,baum,Apa,Virgin Islands,NA,NA,NA
+baum_apalm57_SRR7236012,SRR7236012,baum,Apa,Florida,NA,NA,NA
+baum_apalm58_SRR7236011,SRR7236011,baum,Apa,Florida,NA,NA,NA
+baum_apalm63_SRR7236015,SRR7236015,baum,Apa,Belize,NA,NA,NA
+baum_apalm64_SRR7236016,SRR7236016,baum,Apa,Belize,NA,NA,NA
+baum_apalm65_SRR7236025,SRR7236025,baum,Apa,Belize,NA,NA,NA
+baum_apalm66_SRR7236017,SRR7236017,baum,Apa,Belize,NA,NA,NA
+baum_apalm68_SRR7236018,SRR7236018,baum,Apa,Belize,NA,NA,NA
+baum_apalm71_SRR7236019,SRR7236019,baum,Apa,Belize,NA,NA,NA
+baum_apalm74_SRR7236020,SRR7236020,baum,Apa,Belize,NA,NA,NA
+baum_apalm7_SRR7235985,SRR7235985,baum,Apa,Curacao,NA,NA,NA
+baum_aprol13_SRR12363325,SRR12363325,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol14_SRR12363327,SRR12363327,baum,Apr,Belize,NA,NA,NA
+baum_aprol15_SRR12363328,SRR12363328,baum,Apr,Belize,NA,NA,NA
+baum_aprol17_SRR12363326,SRR12363326,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol18_SRR12363329,SRR12363329,baum,Apr,Belize,NA,NA,NA
+baum_aprol25_SRR12363333,SRR12363333,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol27_SRR12363334,SRR12363334,baum,Apr,Belize,NA,NA,NA
+baum_aprol28_SRR12363335,SRR12363335,baum,Apr,Belize,NA,NA,NA
+baum_aprol31_SRR7235997,SRR7235997,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol32_SRR7235977,SRR7235977,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol33_SRR7235978,SRR7235978,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol34_SRR7236000,SRR7236000,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol42_SRR7236004,SRR7236004,baum,Apr,Belize,NA,NA,NA
+baum_aprol43_SRR7236005,SRR7236005,baum,Apr,Florida,NA,NA,NA
+baum_aprol44_SRR7236006,SRR7236006,baum,Apr,Belize,NA,NA,NA
+baum_aprol47_SRR7236038,SRR7236038,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol4_SRR12363322,SRR12363322,baum,Apr,Virgin Islands,NA,NA,NA
+baum_aprol52_SRR7236035,SRR7236035,baum,Apr,Belize,NA,NA,NA
+baum_aprol59_SRR7236013,SRR7236013,baum,Apr,Belize,NA,NA,NA
+baum_aprol61_SRR7236014,SRR7236014,baum,Apr,Belize,NA,NA,NA
+baum_aprol67_SRR7236024,SRR7236024,baum,Apr,Florida,NA,NA,NA
+baum_aprol69_SRR7236023,SRR7236023,baum,Apr,Bahamas,NA,NA,NA
+baum_aprol70_SRR7236026,SRR7236026,baum,Apr,Curacao,NA,NA,NA
+baum_aprol9_SRR12363323,SRR12363323,baum,Apr,Virgin Islands,NA,NA,NA

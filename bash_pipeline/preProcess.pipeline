@@ -1,0 +1,153 @@
+#!/bin/bash
+
+#SBATCH --job-name=preprocess_pipeline
+#SBATCH --partition=short
+#SBATCH --time=1-00:00:00
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+
+#ingest inputs
+outdir=${1}
+ref_genome=${2}
+se_or_pe=${3} #Either SE or PE
+nucleotide=${4} #Either DNA or RNA (changes how mapping is done due to splice sites)
+minLength=${5};shift 5
+fastq_files="$@"
+
+scriptDir=/work/vollmer/software/jds_scripts
+
+#Checking Conditions
+if [ ${se_or_pe} != "SE" ] && [ ${se_or_pe} != "PE" ]
+then
+  echo "se_or_pe (\$3) must be one of SE or PE"
+  exit 0
+else
+  echo "Running with ${se_or_pe} data"
+fi
+
+if [ ${nucleotide} != "DNA" ] && [ ${nucleotide} != "RNA" ]
+then
+  echo "Nucleotide (\$4) must be one of DNA or RNA"
+  exit 0
+else
+  echo "Running with Nucleotide ${nucleotide}"
+fi
+
+#Make and move to directory - this is where SLURM out files will go
+mkdir -p ${outdir}/slurm
+cd ${outdir} #move to outdir for if temp files are made
+
+#Setup for arrays
+tmp=( ${fastq_files} )
+indir=${tmp%/*}
+full_file=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sort -u) )
+sample_names=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/[\._][rR][12]\.*\..*//' | sort -u) )
+extensions=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/^.*\([\._][rR][12]\)/\1/g' | sort -u) )
+number_of_individuals=${#sample_names[@]}
+number_of_extensions=${#extensions[@]}
+number_of_samples=$((number_of_extensions * number_of_individuals))
+
+#Sort out future filenames
+fastq_files_fastp=$(ls ${fastq_files} | sed -e 's/raw_reads/fastp/g' | sed -e 's/\([\._][rR][12]\.*\..*\)/-fp\1/g')
+fastq_files_fastp_fqscrn=$(ls ${fastq_files} | sed -e 's/raw_reads/fqscrn/g' | sed -e 's/\([\._][rR][12]\.*\..*\)/-fp-fqscrn\1/g')
+fastq_files_fastp_fqscrn_repair=$(ls ${fastq_files} | sed -e 's/raw_reads/repair/g' | sed -e 's/\([\._][rR][12]\.*\..*\)/-fp-fqscrn-repr\1/g')
+
+#Check if files exist from each of the output sets
+get_index(){
+  file_list="$@"
+
+  z=0
+  out=""
+  for file in ${file_list}; do
+    if [ ! -f ${file} ]; then
+      out="${out}${z},"
+      #echo ${file}
+      #echo ${out}
+    fi
+    let z++
+  done
+
+  echo "${out::-1}"
+}
+
+#get_index ${fastq_files_fastp}
+#get_index ${fastq_files_fastp_fqscrn}
+#get_index ${fastq_files_fastp_fqscrn_repair}
+
+#QC Raw Reads
+sbatch \
+  --output=${outdir}/raw_reads/sequence_checking_pipe.out \
+  --job-name=rawQC \
+  ${scriptDir}/assessSequencing.pipeline \
+    ${outdir}/raw_reads/QC \
+    ${ref_genome} \
+    ${se_or_pe} \
+    ${nucleotide} \
+    ${fastq_files}
+
+#Run FastP
+JOBID=$(sbatch \
+  --output=${outdir}/slurm/fastp_%A_%a.output \
+  --array=0-$((${number_of_individuals}-1))%30 \
+  ${scriptDir}/preProcessFastp.slurm \
+    ${outdir}/fastp \
+    ${se_or_pe} \
+    ${minLength} \
+    ${fastq_files})
+fastpID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Fastp job: ${fastpID}"
+
+sbatch \
+  --dependency=afterany:${fastpID} \
+  --output=${outdir}/fastp/sequence_checking_pipe.out \
+  --job-name=postFastp \
+  ${scriptDir}/assessSequencing.pipeline \
+    ${outdir}/fastp/QC \
+    ${ref_genome} \
+    ${se_or_pe} \
+    ${nucleotide} \
+    ${fastq_files_fastp}
+
+#Run FastqScreen
+JOBID=$(sbatch \
+  --dependency=afterany:${fastpID} \
+  --output=${outdir}/slurm/fqscrn_%A_%a.output \
+  --array=0-$((${number_of_samples}-1))%30 \
+  ${scriptDir}/preProcessFQScreen.slurm \
+    ${outdir}/fqscrn \
+    ${fastq_files_fastp})
+fqscrnID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted FQScreen job: ${fqscrnID}"
+#Don't run sequence assessment because reads have wrong names at the moment and repair fixes that without removing anything
+
+JOBID=$(sbatch \
+  --dependency=afterany:${fqscrnID} \
+  --output=${outdir}/slurm/fqscrnSummary_%j.output \
+  ${scriptDir}/runRscript.slurm \
+    ${outdir}/fqscrn)
+fqscrnCollectID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted FQScreen Collection job: ${fqscrnCollectID}"
+
+#Run Repair
+JOBID=$(sbatch \
+  --dependency=afterany:${fqscrnID} \
+  --output=${outdir}/slurm/repair_%A_%a.output \
+  --array=0-$((${number_of_individuals}-1))%30 \
+  ${scriptDir}/preProcessRepair.slurm \
+    ${outdir}/repair \
+    ${se_or_pe} \
+    ${fastq_files_fastp_fqscrn})
+repairID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Repair job: ${repairID}"
+
+sbatch \
+  --dependency=afterany:${repairID} \
+  --output=${outdir}/repair/sequence_checking_pipe.out \
+  --job-name=postRepair \
+  ${scriptDir}/assessSequencing.pipeline \
+    ${outdir}/repair/QC \
+    ${ref_genome} \
+    ${se_or_pe} \
+    ${nucleotide} \
+    ${fastq_files_fastp_fqscrn_repair}

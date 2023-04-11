@@ -1,0 +1,79 @@
+#!/bin/bash
+
+#SBATCH --job-name=seqeuncing_pipeline
+#SBATCH --partition=short
+#SBATCH --time=1-00:00:00
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+
+#ingest inputs
+outdir=${1}
+ref_genome=${2}
+se_or_pe=${3} #Either SE or PE
+nucleotide=${4};shift 4 #Either DNA or RNA (changes how mapping is done due to splice sites)
+fastq_files="$@"
+
+scriptDir=/work/vollmer/software/jds_scripts
+
+#Checking Conditions
+if [ ${se_or_pe} != "SE" ] && [ ${se_or_pe} != "PE" ]
+then
+  echo "se_or_pe (\$3) must be one of SE or PE"
+  exit 0
+else
+  echo "Running with ${se_or_pe} data"
+fi
+
+if [ ${nucleotide} != "DNA" ] && [ ${nucleotide} != "RNA" ]
+then
+  echo "Nucleotide (\$4) must be one of DNA or RNA"
+  exit 0
+else
+  echo "Running with Nucleotide ${nucleotide}"
+fi
+
+#Make and move to directory - this is where SLURM out files will go
+mkdir -p ${outdir}
+cd ${outdir} #move to outdir for if temp files are made
+
+#Setup for arrays
+tmp=( ${fastq_files} )
+indir=${tmp%/*}
+sample_names=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/[\._][rR][12]\.*\..*//' | sort -u) )
+extensions=( $(ls ${fastq_files} | sed -e 's!.*/!!' | sed -e 's/^.*\([\._][rR][12]\)/\1/g' | sort -u) )
+number_of_individuals=${#sample_names[@]}
+number_of_extensions=${#extensions[@]}
+number_of_samples=$((number_of_extensions * number_of_individuals))
+
+#Run FastQC
+JOBID=$(sbatch \
+  --output=${outdir}/fastQC_%j.output \
+  ${scriptDir}/assessFastq.slurm \
+    ${outdir} \
+    ${fastq_files})
+fastQCID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted FastQC job: ${fastQCID}"
+
+#Index Genome
+JOBID=$(sbatch \
+  --output=${outdir}/indexGenome_%j.output \
+  ${scriptDir}/indexGenome.slurm \
+    ${outdir} \
+    ${ref_genome} \
+    ${nucleotide})
+indexID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Genome Indexing job: ${indexID}"
+
+#Mapping Array
+JOBID=$(sbatch \
+  --dependency=afterany:${indexID} \
+  --output=${outdir}/mapGenome_%A_%a.output \
+  --array=0-$((${number_of_individuals}-1))%30 \
+  ${scriptDir}/assessMapping.slurm \
+    ${outdir} \
+    ${se_or_pe} \
+    ${nucleotide} \
+    ${fastq_files})
+mapID=$(echo ${JOBID} | sed 's/[^0-9]*//g')
+echo "Submitted Genome Mapping job: ${mapID}"
