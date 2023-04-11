@@ -9,7 +9,7 @@ Data needed to analyze this data from scratch:
 Can skip SNP preprocessing and calling by starting with the already identified SNPs `Data/genotypes.csv.gz` & `Data/genotype_probabilities.csv.gz`. If so skip preprocessing and SNP calling steps.
 
 ## 1. Preprocess Sequences
-  - all (bash scripts)[bash_code] are designed to run on a SLURM based HPC
+  - all [bash scripts](bash_code) are designed to run on a SLURM based HPC
   - scripts should be modified such that the `${scriptDir}` variable is assigned at the beginning of scripts to the `bash_code` directory.
   ```
     bash bash_code/preProcess.pipeline \
