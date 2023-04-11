@@ -19,7 +19,7 @@ Can skip SNP preprocessing and calling by starting with the already identified S
       DNA \
       140 \
       variant_calling/raw_reads/*fastq.gz
-    ```
+  ```
 
 
 ## 2. Call SNPs
