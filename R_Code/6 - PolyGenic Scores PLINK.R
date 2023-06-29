@@ -127,6 +127,11 @@ imputed_genotypes <- seppop(unfiltered_snps) %>%
   apply(2, impute_mean)
 
 #### Threshold Linkage PGS Linkage Blocks ####
+library(mgcv)
+updated_dr <- read_csv('../intermediate_files/disease_resistance.csv', show_col_types = FALSE) %>%
+  filter(treatment == 'D') %>%
+  select(gen_id, disease_resistance_se)
+
 threshold_pgs <- expand_grid(threshold_p = c(1e-6, 5e-6, 1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 
                                              5e-3, 1e-2, 0.05, 0.1, 0.2, 0.3)) %>%
   rowwise(threshold_p) %>%
@@ -136,14 +141,20 @@ threshold_pgs <- expand_grid(threshold_p = c(1e-6, 5e-6, 1e-5, 5e-5, 1e-4, 5e-4,
                        filter(is_index) %>%
                        mutate(clump_id = str_c(chromosome, clump_id, sep = '-')))) %>%
   mutate(data = list(filter(data, p < threshold_p))) %>%
-  summarise(n_clumps = nrow(data),
+  reframe(n_clumps = nrow(data),
             chromosomes = list(data$clump_id), 
-            calculate_pgs(data, imputed_genotypes),
-            .groups = 'drop') %>%
-  left_join(full_metadata, by = 'ID') %>%
-  nest(pgs_data = c(ID:species_location)) %>%
+            calculate_pgs(data, imputed_genotypes)) %>%
+  left_join(left_join(full_metadata, updated_dr, by = 'gen_id') %>%
+              mutate(inv_var = 1 / (disease_resistance_se^2)), by = 'ID') %>%
+  nest(pgs_data = c(ID:disease_resistance_se, inv_var)) %>%
   rowwise %>%
-  mutate(glance(lm(disease_resistance ~ pgs, data = pgs_data))) %>%
+  # mutate(glance(lm(disease_resistance ~ pgs, data = pgs_data))) %>%
+  mutate(model = list(gam(disease_resistance ~ pgs, family=betar(link="logit"), data = pgs_data, 
+                  weights = (disease_resistance_se^2))),
+         r.squared = summary(model)$r.sq,
+         pred_data = list(tibble(pgs = modelr::seq_range(pgs_data$pgs, n = 100)) %>%
+                            bind_cols(., predict(model, newdata = ., se.fit = TRUE, 
+                                                 type = 'response')))) %>%
   ungroup
 
 threshold_pgs %>%
@@ -195,12 +206,20 @@ ggsave('../Results/pgs_thresholding_r2.png', height = 6, width = 10)
 
 
 threshold_pgs %>%
-  select(threshold_p, pgs_data) %>%
-  unnest(pgs_data) %>%
-  filter(!is.na(disease_resistance)) %>%
-  ggplot(aes(x = pgs, y = disease_resistance)) +
-  geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
-  geom_point(aes(colour = location)) +
+  select(threshold_p, pgs_data, pred_data) %>%
+  ggplot(aes(x = pgs)) +
+  # geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  geom_ribbon(data = . %>% select(-pgs_data) %>% 
+                unnest(pred_data) ,
+              aes(ymin = fit - se.fit, ymax = fit + se.fit),
+              alpha = 0.5) +
+  geom_line(data = . %>% select(-pgs_data) %>% 
+                unnest(pred_data) ,
+              aes(y = fit)) +
+  
+  geom_point(data = . %>% select(-pred_data) %>%
+               unnest(pgs_data) %>% filter(!is.na(disease_resistance)),
+             aes(y = disease_resistance, colour = location)) +
   facet_wrap(~ threshold_p) +
   labs(y = 'Disease Resistance',
        x = 'Polygenic Score',
@@ -227,6 +246,12 @@ lm(disease_resistance ~ pgs, polygenic_scores) %>% car::Anova(type = '2')
 lm(disease_resistance ~ pgs, polygenic_scores) %>% summary
 
 library(ggside)
+
+pred_data <- threshold_pgs %>%
+  filter(threshold_p == p_cutoff) %>%
+  select(pred_data) %>%
+  unnest(pred_data) 
+
 polygenic_scores %>%
   filter(!is.na(disease_resistance)) %>%
   mutate(colour_group = case_when(disease_resistance >= quantile(disease_resistance, 0.75) &
@@ -245,7 +270,9 @@ polygenic_scores %>%
   geom_hline(data = . %>% summarise(disease_resistance = quantile(disease_resistance,
                                                                   c(0.25, 0.5, 0.75))),
              aes(yintercept = disease_resistance), linetype = 'solid', linewidth = 0.1) +
-  geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  geom_ribbon(data = pred_data, aes(y = fit, ymin = fit - se.fit, ymax = fit + se.fit), 
+              colour = NA, alpha = 0.5) +
+  geom_line(data = pred_data, aes(y = fit), colour = 'black', alpha = 1) +
   geom_point(aes(shape = location, colour = colour_group)) +
   geom_xsideboxplot(aes(group = 1), 
                     show.legend = FALSE,
@@ -311,10 +338,21 @@ lfmm_linkage_loci <- full_join(lfmm_results, snp_clumps,
 
 lfmm_linkage_loci_pgs <- lfmm_linkage_loci %>%
   calculate_pgs(imputed_genotypes) %>%
-  left_join(full_metadata, by = 'ID') 
+  left_join(left_join(full_metadata, updated_dr, by = 'gen_id') %>%
+              mutate(inv_var = 1 / (disease_resistance_se^2)), 
+            by = 'ID') 
 
-lm(disease_resistance ~ pgs, data = filter(lfmm_linkage_loci_pgs, !is.na(disease_resistance))) %>%
-  summary
+
+ten_snp_model <- gam(disease_resistance ~ pgs, family=betar(link="logit"), 
+    data = filter(lfmm_linkage_loci_pgs, !is.na(disease_resistance)), 
+    weights = (disease_resistance_se^2)) 
+
+summary(ten_snp_model); anova(ten_snp_model)
+
+ten_snp_pred <- tibble(pgs = modelr::seq_range(lfmm_linkage_loci_pgs$pgs, n = 100)) %>%
+  bind_cols(., predict(ten_snp_model, newdata = ., se.fit = TRUE, 
+                       type = 'response'))
+
 
 lfmm_linkage_loci_pgs %>%
   filter(!is.na(disease_resistance)) %>%
@@ -324,7 +362,15 @@ lfmm_linkage_loci_pgs %>%
   geom_hline(data = . %>% summarise(disease_resistance = quantile(disease_resistance,
                                                                   c(0.25, 0.5, 0.75))),
              aes(yintercept = disease_resistance), linetype = 'dashed') +
-  geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  # geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  
+  geom_ribbon(data = ten_snp_pred, 
+              aes(x = pgs, ymin = fit - se.fit, ymax = fit + se.fit),
+              alpha = 0.5, inherit.aes = FALSE) +
+  geom_line(data = ten_snp_pred, 
+              aes(x = pgs, y = fit),
+              alpha = 0.5, inherit.aes = FALSE) +
+  
   geom_point(aes(colour = location)) +
   geom_xsidedensity(aes(y = after_stat(density), colour = location),
                     show.legend = FALSE) +
@@ -396,28 +442,28 @@ plot_data <- bind_rows(all = polygenic_scores %>%
                                                          TRUE ~ 'error')),
                        .id = 'type') 
 
-facet_labels <- plot_data %>%
+models_preds <- plot_data %>%
   group_by(type) %>%
-  summarise(the_model = list(lm(disease_resistance ~ pgs)),
+  summarise(the_model = list(gam(disease_resistance ~ pgs, family=betar(link="logit"),  
+                                 weights = (disease_resistance_se^2))),
+            pred_data = list(tibble(pgs = modelr::seq_range(pgs, n = 100))),
             .groups = 'rowwise') %>%
-  mutate(broom::glance(the_model),
-         equation = coef(the_model) %>% round(digits = 3) %>%
-           str_c(collapse = ' + ') %>%
-           str_c('x', sep = '') %>%
-           str_c('y', ., sep = ' = ')) %>%
+  mutate(pred_data = list(bind_cols(pred_data, predict(the_model, newdata = pred_data, se.fit = TRUE, 
+                                          type = 'response'))),
+         r.squared = summary(the_model)$r.sq) %>%
   ungroup %>%
-  select(type, equation, r.squared) %>%
   mutate(n_clump = if_else(type == 'all', threshold_pgs %>%
                              filter(threshold_p == p_cutoff) %>%
                              pull(n_clumps), 
                            nrow(lfmm_linkage_loci))) %>%
-  mutate(annotation = str_c(n_clump, ' Loci; ',
-                            # equation,
-                            '; r2 = ', round(r.squared, 3)),
-         annotation = c("B", 'A')) %$%
+  mutate(type = factor(type, levels = c('lfmm_sig', 'all'))) %>%
+  mutate(annotation = c("B", 'A'))
+
+facet_labels <- models_preds %$%
   set_names(annotation, type)
 
-
+models_preds$the_model %>%
+  map(summary)
 
 library(RColorBrewer)
 colour_options <- set_names(rev(c(brewer.pal(3, 'Reds')[c(3,2)], 
@@ -443,32 +489,35 @@ plot_data %>%
   
   ggplot(aes(x = pgs, y = disease_resistance)) +
   geom_vline(data = . %>% group_by(type) %>%
-               summarise(pgs = quantile(pgs, c(0.25, 0.75)),
-                         .groups = 'drop'),
+               reframe(pgs = quantile(pgs, c(0.25, 0.75))),
              aes(xintercept = pgs), linetype = 'solid', linewidth = 0.1,
              colour = 'gray50') +
 
   geom_vline(data = . %>% group_by(type) %>% 
-               summarise(pgs = quantile(pgs, c(0.5)), 
-                         .groups = 'drop'),
+               reframe(pgs = quantile(pgs, c(0.5))),
              aes(xintercept = pgs), linetype = 'solid', linewidth = 0.25,
              colour = 'black') +
   
   geom_hline(data = . %>% group_by(type) %>%
-               summarise(disease_resistance = quantile(disease_resistance,
-                                                       c(0.25, 0.75)),
-                         .groups = 'drop'),
+               reframe(disease_resistance = quantile(disease_resistance,
+                                                       c(0.25, 0.75))),
              aes(yintercept = disease_resistance), linetype = 'solid', linewidth = 0.1,
              colour = 'gray50') +
   
   geom_hline(data = . %>% group_by(type) %>% 
-               summarise(disease_resistance = quantile(disease_resistance,
-                                                       c(0.5)), 
-                         .groups = 'drop'),
+               reframe(disease_resistance = quantile(disease_resistance,
+                                                       c(0.5))),
              aes(yintercept = disease_resistance), linetype = 'solid', linewidth = 0.25,
              colour = 'black') +
   
-  geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  # geom_smooth(method = 'lm', formula = y ~ x, colour = 'black') +
+  geom_ribbon(data = select(models_preds, type, pred_data) %>%
+                unnest(pred_data), #inherit.aes = FALSE,
+              aes(x = pgs, ymin = fit - se.fit, ymax = fit + se.fit, y = NULL),
+              alpha = 0.5) +
+  geom_line(data = select(models_preds, type, pred_data) %>%
+              unnest(pred_data), #inherit.aes = FALSE,
+            aes(x = pgs, y = fit)) +
   geom_point(aes(shape = location, colour = colour_group), size = 2) +
   geom_xsideboxplot(aes(group = 1), 
                     show.legend = FALSE,

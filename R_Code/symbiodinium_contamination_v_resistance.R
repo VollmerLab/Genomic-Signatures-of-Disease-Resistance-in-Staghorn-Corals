@@ -15,6 +15,7 @@ data <- read_csv('../../intermediate_files/preprocessed_metadata.csv', show_col_
                select(-starts_with('percent')) %>%
                group_by(id, genome, symbiodinium_species) %>%
                summarise(across(where(is.numeric), mean), .groups = 'drop') %>%
+               mutate(across(where(is.numeric), floor)) %>%
                ungroup %>%
                nest(contam_data = -c(id)),
             
@@ -230,3 +231,251 @@ composition_plot + diversity_v_resistance_plot +
   plot_annotation(tag_levels = 'A') &
   theme(plot.tag = element_text(size = 24, colour = 'black'))
 ggsave('../../Results/symbiodinium content.png', height = 5, width = 10)
+
+
+
+#### Extra post review ####
+
+symb_comp <- data %>%
+  unnest(contam_data) %>%
+  filter(!is.na(symbiodinium_species)) %>%
+  mutate(unique_map = number_one_hit_one_genome + number_multiple_hits_one_genome) %>%
+  select(ID, gen_id, species_location, disease_resistance, symbiodinium_species, number_reads_processed, unique_map) %>%
+  arrange(ID) %>%
+  mutate(symbiodinium_clade = case_when(str_detect(symbiodinium_species, 'microadriaticum') ~ 'A',
+                                        str_detect(symbiodinium_species, 'pilosum') ~ 'A',
+                                        str_detect(symbiodinium_species, 'natans') ~ 'A',
+                                        str_detect(symbiodinium_species, 'necroappetens') ~ 'A',
+                                        str_detect(symbiodinium_species, 'Breviolum') ~ 'B',
+                                        str_detect(symbiodinium_species, 'clade A') ~ 'A',
+                                        str_detect(symbiodinium_species, 'clade C') ~ 'C',
+                                        str_detect(symbiodinium_species, 'kawagutii') ~ 'F',
+                                        str_detect(symbiodinium_species, 'CCMP') ~ 'A',
+                                        str_detect(symbiodinium_species, 'KB8') ~ 'A',
+                                        TRUE ~ symbiodinium_species)) %>%
+  mutate(symbiodinium_clade = str_replace_all(symbiodinium_clade,
+                                              c('A' = 'Symbiodinium',
+                                                'B' = 'Breviolum',
+                                                'C' = 'Cladocopium', 
+                                                'F' = 'Fugacium')),
+         symbiodinium_clade = factor(symbiodinium_clade, 
+                                     levels = c('Symbiodinium', 'Breviolum', 
+                                                'Cladocopium', 'Fugacium'))) %>% 
+  group_by(ID, gen_id, species_location, disease_resistance, 
+           number_reads_processed, symbiodinium_clade) %>%
+  summarise(unique_map = sum(unique_map),
+            .groups = 'drop') %>%
+  group_by(ID) %>%
+  mutate(total = sum(unique_map),
+         percent_symbiont = unique_map / total) %>%
+  ungroup %>%
+  filter(species_location %in% c('Florida', 'Panama')) %>%
+  
+  ggplot(aes(x = ID, y = percent_symbiont, fill = symbiodinium_clade)) +
+  geom_col(position = position_fill(reverse = TRUE)) +
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0, 0)) +
+  labs(x = NULL,
+       y = 'Read Composition (%)',
+       fill = 'Symbiont Clade') +
+  guides(fill = guide_legend(title.position = 'top', title.hjust = 0.5)) +
+  facet_grid(~species_location, scales = 'free_x', space = 'free_x',
+             switch = "x") +
+  theme_classic() +
+  theme(legend.position = 'bottom',
+        panel.background = element_rect(colour = 'black'),
+        axis.text = element_text(colour = 'black', size = 14),
+        axis.title = element_text(colour = 'black', size = 16),
+        legend.title = element_text(colour = 'black', size = 16),
+        legend.text = element_text(colour = 'black', size = 14),
+        strip.background = element_blank(),
+        strip.placement = 'outside',
+        strip.text = element_text(colour = 'black', size = 16),
+        axis.text.x = element_blank())
+
+
+symb_comp
+
+
+
+nmds_data <- data %>%
+  unnest(contam_data) %>%
+  filter(!is.na(symbiodinium_species)) %>%
+  mutate(unique_map = number_one_hit_one_genome + number_multiple_hits_one_genome) %>%
+  select(ID, gen_id, species_location, disease_resistance, symbiodinium_species, number_reads_processed, unique_map) %>%
+  arrange(ID) %>%
+  mutate(symbiodinium_clade = case_when(str_detect(symbiodinium_species, 'microadriaticum') ~ 'A',
+                                        str_detect(symbiodinium_species, 'pilosum') ~ 'A',
+                                        str_detect(symbiodinium_species, 'natans') ~ 'A',
+                                        str_detect(symbiodinium_species, 'necroappetens') ~ 'A',
+                                        str_detect(symbiodinium_species, 'Breviolum') ~ 'B',
+                                        str_detect(symbiodinium_species, 'clade A') ~ 'A',
+                                        str_detect(symbiodinium_species, 'clade C') ~ 'C',
+                                        str_detect(symbiodinium_species, 'kawagutii') ~ 'F',
+                                        str_detect(symbiodinium_species, 'CCMP') ~ 'A',
+                                        str_detect(symbiodinium_species, 'KB8') ~ 'A',
+                                        TRUE ~ symbiodinium_species)) %>%
+  mutate(symbiodinium_clade = str_replace_all(symbiodinium_clade,
+                                              c('A' = 'Symbiodinium',
+                                                'B' = 'Breviolum',
+                                                'C' = 'Cladocopium', 
+                                                'F' = 'Fugacium'))) %>% 
+  group_by(ID, gen_id, species_location, disease_resistance, number_reads_processed, symbiodinium_clade) %>%
+  summarise(unique_map = sum(unique_map),
+            .groups = 'drop') %>%
+  group_by(ID) %>%
+  mutate(total = sum(unique_map),
+         percent_symbiont = unique_map / total) %>%
+  ungroup %>%
+  
+  filter(species_location %in% c('Florida', 'Panama')) %>%
+  select(-number_reads_processed, -total, -percent_symbiont) %>%
+  pivot_wider(names_from = symbiodinium_clade, values_from = unique_map)
+
+
+library(vegan)
+the_nmds <- select(nmds_data, -gen_id:-disease_resistance) %>%
+  column_to_rownames('ID') %>%
+  metaMDS()
+plot(the_nmds)
+
+adonis2(select(nmds_data, -gen_id:-disease_resistance) %>%
+          column_to_rownames('ID') ~ species_location * disease_resistance, 
+          data = select(nmds_data, gen_id:disease_resistance),
+        by = 'margin')
+
+adonis2(select(nmds_data, -gen_id:-disease_resistance) %>%
+          column_to_rownames('ID') ~ species_location + disease_resistance, 
+        data = select(nmds_data, gen_id:disease_resistance),
+        by = 'margin')
+
+
+
+location_colour <- set_names(c(wesanderson::wes_palette("Zissou1", 9, type = "continuous")[c(2, 8)]),
+                             c('Florida', 'Panama'))
+
+nmds_plot <- scores(the_nmds, 'sites') %>%
+  as_tibble(rownames = 'ID') %>%
+  left_join(nmds_data,
+            by = 'ID') %>%
+  mutate(panel = 'A') %>%
+  ggplot(aes(x = NMDS1, y = NMDS2, colour = species_location, shape = species_location)) +
+  geom_point() +
+  geom_text(data = scores(the_nmds, 'species') %>%
+              as_tibble(rownames = 'Symbiont Clade'),
+            aes(x = NMDS1, y = NMDS2, label = `Symbiont Clade`), 
+            inherit.aes = FALSE, size = 6, hjust = 'inward', fontface = 'italic') +
+  scale_colour_manual(values = location_colour) +
+  scale_shape_manual(values = c('Florida' = 'circle', 'Panama' = 'triangle')) +
+  facet_grid(~panel, switch = 'x') +
+  theme_classic() +
+  theme(legend.position = 'none',
+        panel.background = element_rect(colour = 'black'),
+        axis.text = element_text(colour = 'black', size = 14),
+        axis.title = element_text(colour = 'black', size = 16),
+        legend.text = element_text(colour = 'black', size = 16),
+        strip.placement = 'outside',
+        strip.text = element_blank(),
+        strip.background = element_blank())
+
+
+nmds_plot / symb_comp + 
+  plot_layout(heights = c(1, 0.3)) +
+  plot_annotation(tag_levels = 'A') & 
+  theme(plot.tag = element_text(size = 18))
+ggsave('../../Results/symb_composition.png', height = 7, width = 9)
+
+
+
+library(brms)
+library(tidybayes)
+brms_data <- nmds_data %>%
+  mutate(Y = cbind(Symbiodinium, Breviolum, Cladocopium, Fugacium)) %>%
+  select(-c(Symbiodinium, Breviolum, Cladocopium, Fugacium)) %>%
+  mutate(total = rowSums(Y))
+
+brms_model <- brm(Y | trials(total) ~ species_location * disease_resistance,
+                  family = multinomial(),
+                  data = brms_data,
+                  backend = 'cmdstanr',
+                  chains = 4,
+                  cores = 4)
+summary(brms_model)
+
+
+brms_data %>%
+  modelr::data_grid(species_location = unique(species_location),
+                    disease_resistance = modelr::seq_range(disease_resistance, 10)) %>%
+  mutate(total = 1) %>%
+  add_epred_draws(brms_model, re_formula = NA) %>%
+  point_interval() %>%
+  ungroup %>%
+  
+  ggplot(aes(x = disease_resistance, y = .epred, ymin = .lower, ymax = .upper, 
+             colour = species_location, fill = species_location)) +
+  geom_ribbon(alpha = 0.5, colour = NA) +
+  geom_line() +
+  facet_wrap(~.category, scales = 'free_y') +
+  scale_y_continuous(labels = scales::percent_format()) +
+  guides(colour = guide_legend(title.position = 'top', title.hjust = 0.5)) +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 16),
+        axis.text = element_text(colour = 'black', size = 12),
+        legend.title = element_text(colour = 'black', size = 16),
+        legend.text = element_text(colour = 'black', size = 12),
+        panel.background = element_rect(colour = 'black'),
+        legend.position = 'bottom')
+
+
+brms_data %>%
+  modelr::data_grid(species_location = unique(species_location),
+                    disease_resistance = modelr::seq_range(disease_resistance, 10)) %>%
+  mutate(total = 1) %>%
+  add_epred_draws(brms_model, re_formula = NA) %>%
+  point_interval() %>%
+  ungroup %>%
+  
+  ggplot(aes(x = disease_resistance, y = .epred, ymin = .lower, ymax = .upper, 
+             colour = .category, fill = .category)) +
+  geom_ribbon(alpha = 0.5, colour = NA) +
+  geom_line() +
+  facet_wrap(~species_location, scales = 'free_y') +
+  scale_y_continuous(labels = scales::percent_format()) +
+  guides(colour = guide_legend(title.position = 'top', title.hjust = 0.5)) +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 16),
+        axis.text = element_text(colour = 'black', size = 12),
+        legend.title = element_text(colour = 'black', size = 16),
+        legend.text = element_text(colour = 'black', size = 12),
+        panel.background = element_rect(colour = 'black'),
+        legend.position = 'bottom')
+
+
+brms_data %>%
+  modelr::data_grid(species_location = unique(species_location),
+                    disease_resistance = median(disease_resistance)) %>%
+  mutate(total = 1) %>%
+  add_epred_draws(brms_model, re_formula = NA) %>%
+  point_interval() %>%
+  ungroup %>%
+  
+  ggplot(aes(x = .category, y = .epred, ymin = .lower, ymax = .upper, 
+             colour = species_location)) +
+  geom_pointrange(position = position_dodge(0.5)) +
+  facet_wrap(~.category, scales = 'free_y') +
+  scale_y_continuous(labels = scales::percent_format()) +
+  guides(colour = guide_legend(title.position = 'top', title.hjust = 0.5)) +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 16),
+        axis.text = element_text(colour = 'black', size = 12),
+        legend.title = element_text(colour = 'black', size = 16),
+        legend.text = element_text(colour = 'black', size = 12),
+        panel.background = element_rect(colour = 'black'),
+        legend.position = 'bottom')
+
+
+hypothesis(brms_model, 'muBreviolum_species_locationPanama > 0')
+hypothesis(brms_model, 'muCladocopium_species_locationPanama > 0')
+hypothesis(brms_model, 'muFugacium_species_locationPanama > 0')
+
+
+library(emmeans)
