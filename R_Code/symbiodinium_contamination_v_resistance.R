@@ -7,9 +7,9 @@ library(lmerTest)
 location_colour <- set_names(c(wesanderson::wes_palette("Zissou1", 9, type = "continuous")[c(2, 8)]),
                              c('Florida', 'Panama'))
 
-data <- read_csv('../../intermediate_files/preprocessed_metadata.csv', show_col_types = FALSE) %>%
+data <- read_csv('../intermediate_files/preprocessed_metadata.csv', show_col_types = FALSE) %>%
   
-  inner_join(read_csv('../../../Bioinformatics/variant_calling/18October2022/fastq_screen_results_summary.csv',
+  inner_join(read_csv('../intermediate_files/fastq_screen_results_summary.csv',
                       show_col_types = FALSE) %>%
                clean_names %>%
                select(-starts_with('percent')) %>%
