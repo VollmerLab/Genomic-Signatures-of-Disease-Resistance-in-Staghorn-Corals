@@ -68,7 +68,6 @@ Here is the list of software installed and used in this complete analysis. Becau
 - [ggdist](https://cran.r-project.org/web/packages/ggdist/index.html)
 - [gghalves](https://cran.r-project.org/web/packages/gghalves/index.html)
 - [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
-- [ggprism](https://cran.r-project.org/web/packages/ggprism/index.html)
 - [ggrepel](https://cran.r-project.org/web/packages/ggrepel/index.html)
 - [gratia](https://cran.r-project.org/web/packages/gratia/index.html)
 - [hierfstat](https://cran.r-project.org/web/packages/hierfstat/index.html)
