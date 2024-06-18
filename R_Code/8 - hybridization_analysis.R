@@ -306,34 +306,3 @@ performance::check_model(resist_hybrid_lm)
 
 ggplot(resistance_v_hybrid, aes(x = Axis1, y = disease_resistance, colour = location)) +
   geom_point()
-
-
-#### OLD ####
-
-if(file.exists('../intermediate_files/hybrid_pca.rds')){
-  acropora_pca <- read_rds('../intermediate_files/hybrid_pca.rds')
-} else {
-  #### Hybridize two species ####
-  N_hybrid <- 50
-  Ac <- hybridize(acropora_split[['Ac']], acropora_split[['Ac']], n = N_hybrid, pop = "Ac", 
-                  hyb.label = str_c('Ac', 1:N_hybrid, sep = '_'))
-  Ap <- hybridize(acropora_split[['Apa']], acropora_split[['Apa']], n = N_hybrid, pop = "Apa", 
-                  hyb.label = str_c('Apa', 1:N_hybrid, sep = '_'))
-  F1 <- hybridize(acropora_split[['Ac']], acropora_split[['Apa']], n = N_hybrid, pop = "F1", 
-                  hyb.label = str_c('F1', 1:N_hybrid, sep = '_'))
-  F2 <- hybridize(F1, F1, n = N_hybrid, pop = "F2", 
-                  hyb.label = str_c('F2', 1:N_hybrid, sep = '_'))
-  Ac_bx <- hybridize(acropora_split[['Ac']], F1, n = N_hybrid, pop = "Ac_F1", 
-                     hyb.label = str_c('AcBx', 1:N_hybrid, sep = '_'))
-  Ap_bx <- hybridize(acropora_split[['Apa']], F1, n = N_hybrid, pop = "Apa_F1", 
-                     hyb.label = str_c('ApBx', 1:N_hybrid, sep = '_'))
-  
-  #### Plot PCA with observed & simulated hybrids ####
-  
-  acropora_hybrids <- repool(list(acropora_gi, Ac, Ap, F1, F2, Ac_bx, Ap_bx)) 
-  
-  acropora_pca <- acropora_hybrids %>%
-    scaleGen(., center = FALSE, scale = FALSE, NA.method = "mean") %>%
-    dudi.pca(center = TRUE, scale = TRUE, scannf = FALSE, nf = nLoc(acropora_gi))
-  write_rds(acropora_pca, '../intermediate_files/hybrid_pca.rds')
-}

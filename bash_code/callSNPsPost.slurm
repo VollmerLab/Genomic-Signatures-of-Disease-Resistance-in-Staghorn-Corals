@@ -40,5 +40,5 @@ pcangsd \
   --admix_auto 10
 conda deactivate
 
-module load R/4.2.0
-Rscript ${scriptDir}/r_utils/post_genotyping.R ${outdir}
+bash ${scriptDir}/runRscript.slurm \
+  ${scriptDir}/r_utils/post_genotyping.R ${outdir}

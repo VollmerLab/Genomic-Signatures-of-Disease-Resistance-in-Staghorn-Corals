@@ -138,11 +138,10 @@ genetic_data <- expand_grid(pop_group = c('acerv'),
   ungroup 
 
 #### Run interspecific ANGSD on used subset and unlinked loci ####
-
-if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_interspecific/sample_structure_pca_data.csv')){
-  angsd_results_interspecific <- read_csv('../../Bioinformatics/variant_calling/18October2022/subset_interspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
+if(file.exists('../variant_calling/subset_interspecific/sample_structure_pca_data.csv')){
+  angsd_results_interspecific <- read_csv('../variant_calling/subset_interspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
 } else {
-  dir.create('../../Bioinformatics/variant_calling/18October2022/subset_interspecific')
+  dir.create('../variant_calling/subset_interspecific')
   kept_samples <- read_csv('../intermediate_files/clone_metadata.csv', show_col_types = FALSE) %>%
     group_by(clone_group) %>%
     mutate(keep = pct_missing == min(pct_missing)) %>%
@@ -152,9 +151,9 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_inters
     mutate(keep = keep & ((species == 'Ac' & pct_missing  < 0.3) | species == 'Apa' | species == 'Apr')) %>%
     select(keep) %>%
     mutate(keep = as.integer(keep)) %T>%
-    write_csv('../../Bioinformatics/variant_calling/18October2022/subset_interspecific/subset_data.txt', col_names = FALSE)
+    write_csv('../variant_calling/subset_interspecific/subset_data.txt', col_names = FALSE)
   
-  kept_loci <- read_csv('../../Bioinformatics/variant_calling/18October2022/genotypes.csv', 
+  kept_loci <- read_csv('../variant_calling/genotyping/genotypes.csv', 
                         col_types = cols(.default = col_integer(),
                                          contig = col_character(),
                                          ref = col_character(),
@@ -174,18 +173,18 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_inters
     mutate(keep = if_else(is.na(keep), FALSE, keep)) %>%
     select(keep) %>%
     mutate(keep = as.integer(keep)) %T>%
-    write_csv('../../Bioinformatics/variant_calling/18October2022/subset_interspecific/subset_loci.txt', col_names = FALSE)
+    write_csv('../variant_calling/subset_interspecific/subset_loci.txt', col_names = FALSE)
 
   #Copy subset_loci and subset_data to Discovery
   # srun -t 24:00:00 --nodes=1 --cpus-per-task=40 --pty /bin/bash
   # source activate pcangsd
-  # outdir=/scratch/j.selwyn/variant_calling/k2_18-October-2022/genotyping
-  # cd ${outdir}/subset_interspecific
-  # scriptDir=/work/vollmer/software/jds_scripts
+  # scriptDir=$(pwd)/bash_code
+  # outdir=$(pwd)/variant_calling/subset_interspecific
+  # cd ${outdir}
   
-  # ln -s ${outdir}/genolike.beagle.gz
-  # ln -s ${outdir}/bam.list
-  # ln -s ${outdir}/genolike.geno.gz
+  # ln -s ${outdir}/../genotyping/genolike.beagle.gz
+  # ln -s ${outdir}/../genotyping/bam.list
+  # ln -s ${outdir}/../genotyping/genolike.geno.gz
   
   # pcangsd \
   #   -b genolike.beagle.gz \
@@ -204,6 +203,8 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_inters
   # bash ${scriptDir}/runRscript.slurm \
   #   ${scriptDir}/r_utils/post_genotyping.R \
   #     $(pwd)
+  
+  angsd_results_interspecific <- read_csv('../variant_calling/subset_interspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
 }
 
 angsd_results_interspecific %>%
@@ -298,10 +299,10 @@ angsd_results_interspecific %>%
   anova
 
 #### Run intraspecific ANGSD on used subset and unlinked loci ####
-if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_intraspecific/sample_structure_pca_data.csv')){
-  angsd_results_intraspecific <- read_csv('../../Bioinformatics/variant_calling/18October2022/subset_intraspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
+if(file.exists('../variant_calling/subset_intraspecific/sample_structure_pca_data.csv')){
+  angsd_results_intraspecific <- read_csv('../variant_calling/subset_intraspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
 } else {
-  dir.create('../../Bioinformatics/variant_calling/18October2022/subset_intraspecific')
+  dir.create('../variant_calling/subset_intraspecific')
   kept_samples <- read_csv('../intermediate_files/clone_metadata.csv', show_col_types = FALSE) %>%
     group_by(clone_group) %>%
     mutate(keep = pct_missing == min(pct_missing)) %>%
@@ -311,9 +312,9 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_intras
     mutate(keep = keep & ((species == 'Ac' & pct_missing  < 0.3))) %>%
     select(keep) %>%
     mutate(keep = as.integer(keep)) %T>%
-    write_csv('../../Bioinformatics/variant_calling/18October2022/subset_intraspecific/subset_data.txt', col_names = FALSE)
+    write_csv('../variant_calling/subset_intraspecific/subset_data.txt', col_names = FALSE)
   
-  kept_loci <- read_csv('../../Bioinformatics/variant_calling/18October2022/genotypes.csv', 
+  kept_loci <- read_csv('../variant_calling/genotyping/genotypes.csv', 
                         col_types = cols(.default = col_integer(),
                                          contig = col_character(),
                                          ref = col_character(),
@@ -333,19 +334,20 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_intras
     mutate(keep = if_else(is.na(keep), FALSE, keep)) %>%
     select(keep) %>%
     mutate(keep = as.integer(keep)) %T>%
-    write_csv('../../Bioinformatics/variant_calling/18October2022/subset_intraspecific/subset_loci.txt', col_names = FALSE)
+    write_csv('../variant_calling/subset_intraspecific/subset_loci.txt', col_names = FALSE)
   
   #Copy subset_loci and subset_data to Discovery
   # srun -t 24:00:00 --nodes=1 --cpus-per-task=40 --pty /bin/bash
-  # source pcangsd
-  # outdir=/scratch/j.selwyn/variant_calling/k2_18-October-2022/genotyping
-  # cd ${outdir}/subset_intraspecific
-  # scriptDir=/work/vollmer/software/jds_scripts
+  # source activate pcangsd
+  # scriptDir=$(pwd)/bash_code
+  # outdir=$(pwd)/variant_calling/subset_intraspecific
+  # cd ${outdir}
   
-  # ln -s ${outdir}/genolike.beagle.gz
-  # ln -s ${outdir}/bam.list
-  # ln -s ${outdir}/genolike.geno.gz
-
+  # ln -s ${outdir}/../genotyping/genolike.beagle.gz
+  # ln -s ${outdir}/../genotyping/bam.list
+  # ln -s ${outdir}/../genotyping/genolike.geno.gz
+  
+  
   # pcangsd \
   #   -b genolike.beagle.gz \
   #   -t ${SLURM_CPUS_PER_TASK} \
@@ -363,6 +365,8 @@ if(file.exists('../../Bioinformatics/variant_calling/18October2022/subset_intras
   # bash ${scriptDir}/runRscript.slurm \
   #   ${scriptDir}/r_utils/post_genotyping.R \
   #     $(pwd)
+  
+  angsd_results_intraspecific <- read_csv('../variant_calling/subset_intraspecific/sample_structure_pca_data.csv', show_col_types = FALSE)
 }
 
 wesanderson::wes_palette("Zissou1", 9, type = "continuous")
@@ -492,10 +496,6 @@ ggsave('../Results/admixture_v_disease.png', height = 7, width = 7)
 mkdir <- map_lgl(c('../lea_projects'), ~dir.create(.x, showWarnings = FALSE))
 setwd('../lea_projects')
 
-#write binomial files
-# genetic_data %$%
-#   walk2(genomic_data, filename, write_lea_genetics, model_family = 'binomial')
-
 #write genotype files
 lea_data <- genetic_data %>%
   rowwise(pop_group, only_unlinked) %>%
@@ -523,25 +523,17 @@ pca_out$plot[[1]] +
         panel.border = element_rect(colour = 'black', fill = NA)) 
 ggsave('../Results/unlinked_pca.png', height = 10, width = 10)
 
-
 #### Run Structure ####
 structure_run <- lea_data %>%
   ungroup %>%
   filter(only_unlinked) %>%
   select(pop_group, geno_file) %>%
-  mutate(binom_file = str_replace(geno_file, '\\.geno', '_binom.geno')) %>%
-  pivot_longer(cols = ends_with('file'),
-               names_to = 'model',
-               values_to = 'geno_file') %>%
-  mutate(model = str_remove(model, '_file') %>% str_replace('geno', 'pois_norm')) %>%
-  filter(str_detect(model, 'norm')) %>%
-  rowwise(pop_group, model) %>%
+  rowwise(pop_group) %>%
   summarise(structure_out = list(run_structure(geno_file, k_choices = c(1:10), N = 10, calc_entropy = TRUE)),
             cross_plot = list(cross_ent_plot(structure_out)),
             .groups = 'drop')
 
 structure_run %>%
-  filter(model != 'binom') %>%
   pull(cross_plot) %>%
   wrap_plots() +
   theme(panel.background = element_rect(colour = 'black', linewidth = 1),
@@ -552,7 +544,6 @@ structure_run %>%
 ggsave('../Results/unlinked_Choosing_K.png', height = 5, width = 5)
 
 structure_plots <- structure_run %>%
-  filter(model != 'binom') %>%
   mutate(location = str_extract(pop_group, 'panama|florida') %>% str_to_sentence,
          K = c(2)) %>%
   rowwise(pop_group) %>%
@@ -562,102 +553,21 @@ structure_plots <- structure_run %>%
 wrap_plots(structure_plots$plots)
 ggsave('../Results/unlinked_structure_plot.png', height = 5, width = 10)
 
-
-run_choice <- ifelse(is.null(cross.entropy(genetic_structure, K = choose_K)), 
-                     1L, 
-                     which.min(cross.entropy(genetic_structure, K = choose_K)))
-
-Q(structure_run$structure_out[[1]], K = 2, run = 1) %>%
-  as_tibble() %>%
-  rename_with(~str_replace(., '^V', 'Cluster_')) %>%
-  bind_cols(meta_data) %>%
-  rowwise() %>%
-  mutate(admix_assignment = which.max(c_across(starts_with('Cluster'))) %>% 
-           str_c('Cluster', .)) %>%
-  mutate(max = max(c_across(starts_with('Cluster'))),
-         match = which.max(c_across(starts_with('Cluster')))) %>%
-  ungroup %>%
-  arrange(disease_resistance) %>%
-  mutate(number = row_number()) %>%
-  pivot_longer(cols = starts_with('Cluster')) %>%
-  ggplot(aes(x = number, y = value, fill = name)) +
-  geom_bar(position="stack", stat="identity") +
-  # facet_grid( ~ location, scales = 'free_x', space = 'free_x') +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  labs(x = NULL,
-       y = 'Assignment Probability',
-       fill = NULL) +
-  theme_classic() +
-  theme(legend.direction = "horizontal", 
-        legend.position = "bottom",
-        legend.box = "vertical",
-        axis.text = element_text(colour = 'black'),
-        axis.text.x = element_blank(),
-        panel.border = element_rect(colour = 'black', fill = 'transparent'))
-
-
 #### Run best K once for linked (binomial and nonbinomial) for imputation purposes
 linked_model_out <- lea_data %>%
   ungroup %>%
   filter(!only_unlinked) %>%
   select(pop_group, geno_file) %>%
   mutate(location = str_extract(pop_group, 'panama|florida') %>% str_to_sentence,
-         K = c(2),
-         binom_file = str_replace(geno_file, '\\.geno', '_binom.geno')) %>%
-  pivot_longer(cols = ends_with('file'),
-               names_to = 'model',
-               values_to = 'geno_file') %>%
-  mutate(model = str_remove(model, '_file') %>% str_replace('geno', 'pois_norm')) %>%
-  filter(str_detect(model, 'norm')) %>%
-  rowwise(pop_group, model) %>%
+         K = c(2)) %>%
+  rowwise(pop_group) %>%
   summarise(structure_out = list(run_structure(geno_file, k_choices = K, N = 1, calc_entropy = FALSE)),
             structure_plot = list(structure_plot(structure_out, K, location) + labs(title = pop_group)),
             .groups = 'drop')
 
 linked_model_out %>%
-  filter(model != 'binom') %>%
   pull(structure_plot) %>%
   wrap_plots()
 ggsave('../Results/linked_structure_plot.png', height = 5, width = 10)
-
-
-
-#### Joint Plotting ####
-
-as_tibble(pca_out$pca_out[[1]]$projections) %>%
-  select(V1:V5) %>%
-  # bind_cols(tibble(sample = colnames(snp_data)[-1:-4])) %>%
-  bind_cols(meta_data)%>%
-  filter(V2 < -30)
-
-Q(structure_run$structure_out[[1]], K = 2, run = 1) %>%
-  as_tibble() %>%
-  rename_with(~str_replace(., '^V', 'Cluster_')) %>%
-  bind_cols(as_tibble(pca_out$pca_out[[1]]$projections) %>%
-              select(V1:V5)) %>%
-  bind_cols(meta_data) %>%
-  rowwise() %>%
-  mutate(admix_assignment = which.max(c_across(starts_with('Cluster'))) %>% 
-           str_c('Cluster', .)) %>%
-  mutate(max = max(c_across(starts_with('Cluster'))),
-         match = which.max(c_across(starts_with('Cluster')))) %>%
-  ungroup %>%
-  ggplot(aes(x = V1, y = V2, colour = Cluster_2, shape = location)) +
-  geom_point() +
-  scale_color_gradient2(midpoint = 0.5) +
-  theme_classic()
-
-
-Q(structure_run$structure_out[[1]], K = 2, run = 1) %>%
-  as_tibble() %>%
-  rename_with(~str_replace(., '^V', 'Cluster_')) %>%
-  bind_cols(as_tibble(pca_out$pca_out[[1]]$projections) %>%
-              select(V1:V5)) %>%
-  bind_cols(meta_data) %>%
-    ggplot(aes(x = disease_resistance, y = V2)) +
-  geom_point()
-
-
 
           

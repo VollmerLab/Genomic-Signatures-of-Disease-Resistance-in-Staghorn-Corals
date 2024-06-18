@@ -248,9 +248,16 @@ sample_data <- read_csv('../intermediate_files/collected_sample_metadata.csv',
 
 resistance_data <- read_csv('../intermediate_files/disease_resistance.csv', show_col_types = FALSE)
 
-genomic_data <- process_angsd(genotype_file = '../Data/genotypes.csv.xz',
-                              probability_file = '../Data/genotype_probabilities_.*.csv.xz',
-                              sample_names = sample_data$ID, 
+#Use if skipping SNP calling step
+# genomic_data <- process_angsd(genotype_file = '../Data/genotypes.csv.xz',
+#                               probability_file = '../Data/genotype_probabilities_.*.csv.xz',
+#                               sample_names = sample_data$ID, 
+#                               cutoff = confidence_cutoff)
+
+#Use if calling SNPs on your own 
+genomic_data <- process_angsd(genotype_file = '../variant_calling/genotyping/genotypes.csv',
+                              probability_file = '../variant_calling/genotyping/genotype_probabilities.csv',
+                              sample_names = sample_data$ID,
                               cutoff = confidence_cutoff)
 strata(genomic_data) <- sample_data
 genomic_data <- flip_loci(genomic_data)
@@ -258,13 +265,6 @@ genomic_data <- flip_loci(genomic_data)
 write_rds(genomic_data, '../intermediate_files/initial_full_genomic.rds')
 
 #### Identify Clones ####
-png('../Results/justUs_clone_removal.png', width = 7, height = 7, units = 'in', res = 125)
-clone_data <- as.snpclone(genomic_data[str_detect(genomic_data@ind.names, 'baum', negate = TRUE),])
-filter_stat_data <- filter_stats(clone_data, distance = 'bitwise.dist', plot = TRUE)
-cutoff_clones <- cutoff_predictor(filter_stat_data$farthest$THRESHOLDS) 
-abline(v = cutoff_clones, col = 'red') 
-dev.off()
-
 png('../Results/allSP_clone_removal.png', width = 7, height = 7, units = 'in', res = 125)
 clone_data <- as.snpclone(genomic_data)
 filter_stat_data <- filter_stats(clone_data, distance = 'bitwise.dist', plot = TRUE)
@@ -322,69 +322,3 @@ preprocessed_loci <- expand_grid(pop_group = c('apalm_acerv', 'acerv'),
                                                   linkage_filter = only_unlinked)))
 
 preprocessed_loci$subset_population[[4]]
-
-# 
-# #### Write GDS files for each of two options ####
-# #Apalm v Acerv with Baum data
-# apalm_acerv <- genomic_data[genomic_data@ind.names %in% metadata_clones_removed$ID[metadata_clones_removed$species != 'Apr']] %>%
-#   remove_monomorphic() %>%
-#   remove_missing_pop(~species)
-# 
-# apalm_acerv_gds <- genlight_to_gds(apalm_acerv, '../intermediate_files/initial_apalm_acerv.gds')
-# 
-# #Acerv just our data
-# acerv <- genomic_data[genomic_data@ind.names %in% metadata_clones_removed$ID[metadata_clones_removed$data_origin == 'vollmer']] %>%
-#   remove_monomorphic() %>%
-#   remove_missing_pop(~location)
-# 
-# acerv_gds <- genlight_to_gds(acerv, '../intermediate_files/initial_acerv.gds')
-# 
-# #### Filter by Locus missingness & MAF ####
-# species_locus_keep <- choose_snps(apalm_acerv_gds, 
-#                                   maf = minor_allele_frequency, 
-#                                   missing.rate = locus_missingness)
-# filtered_apalm_acerv <- apalm_acerv[,species_locus_keep]
-# 
-# 
-# acerv_locus_keep <- choose_snps(acerv_gds, 
-#                                 maf = minor_allele_frequency, 
-#                                 missing.rate = locus_missingness)
-# filtered_acerv <- acerv[,acerv_locus_keep]
-# 
-# #### Write metadata, RDS of genlight and gds files for future analysis ####
-# metadata_out <- metadata_clones_removed %>%
-#   select(-pct_missing) %>%
-#   left_join(as.matrix(filtered_apalm_acerv) %>%
-#               is.na %>%
-#               rowSums() %>%
-#               divide_by(nLoc(filtered_apalm_acerv)) %>%
-#               enframe(name = 'ID', value = 'pct_missing_species'),
-#             by = 'ID') %>%
-#   left_join(as.matrix(filtered_acerv) %>%
-#               is.na %>%
-#               rowSums() %>%
-#               divide_by(nLoc(filtered_acerv)) %>%
-#               enframe(name = 'ID', value = 'pct_missing_location'),
-#             by = 'ID') 
-# write_csv(metadata_out, '../intermediate_files/preprocessed_metadata.csv')
-# 
-# write_rds(filtered_apalm_acerv, '../intermediate_files/preprocessed_apalm_acerv.rds', compress = 'xz')
-# write_rds(filtered_acerv, '../intermediate_files/preprocessed_acerv.rds', compress = 'xz')
-# 
-# filtered_apalm_acerv_gds <- genlight_to_gds(filtered_apalm_acerv, 
-#                                             '../intermediate_files/preprocessed_apalm_acerv.gds')
-# filtered_acerv_gds <- genlight_to_gds(filtered_acerv, '../intermediate_files/preprocessed_acerv.gds')
-# 
-# #### Filter for only Unlinked Loci ####
-# unlinked_apalm_acerv_loci <- find_unlinked_loci(filtered_apalm_acerv_gds, ld.threshold = LD_cutoff, 
-#                                            method = 'composite', start.pos = 'random')
-# unlinked_apalm_acerv <- filtered_apalm_acerv[,unlinked_apalm_acerv_loci]
-# write_rds(unlinked_apalm_acerv, '../intermediate_files/unlinked_apalm_acerv.rds', compress = 'xz')
-# genlight_to_gds(unlinked_apalm_acerv, '../intermediate_files/unlinked_apalm_acerv.gds')
-# 
-# 
-# unlinked_acerv_loci <- find_unlinked_loci(filtered_acerv_gds, ld.threshold = LD_cutoff, 
-#                                            method = 'composite', start.pos = 'random')
-# unlinked_acerv <- filtered_acerv[,unlinked_acerv_loci]
-# write_rds(unlinked_acerv, '../intermediate_files/unlinked_acerv.rds', compress = 'xz')
-# genlight_to_gds(unlinked_acerv, '../intermediate_files/unlinked_acerv.gds')
