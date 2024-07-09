@@ -102,7 +102,7 @@ Here is the list of software installed and used in this complete analysis. Becau
     - *Acropora cervicornis* short-read data
 
 ## 1. Preprocess Sequences
-  ```
+  ```sh
     bash bash_code/preProcess.pipeline \
       $(pwd)/variant_calling \
       $(pwd)/genome/acerv_genome.fasta \
