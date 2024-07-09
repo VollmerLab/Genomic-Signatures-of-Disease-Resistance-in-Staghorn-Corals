@@ -36,7 +36,7 @@ Here is the list of software installed and used in this complete analysis. Becau
   - [fastp](https://github.com/OpenGene/fastp)
 - [`bash_code/preProcessFQScreen.slurm`](bash_code/preProcessFQScreen.slurm)
   - Database to filter against. Database construction described [here](https://stevenwingett.github.io/FastQ-Screen/). Customized to include *Symbiodinium* genomes (see [Table S3](Manuscript/Vollmer et al 2023 Supplement.pdf) for accession numbers)
-    - Change `CONFFILE` variable in the [`bash_code\preProcessFQScreen.slurm`](bash_code\preProcessFQScreen.slurm) script to target your configuration file for fastq screen
+    - Change `CONFFILE` variable in the [`bash_code/preProcessFQScreen.slurm`](bash_code/preProcessFQScreen.slurm) script to target your configuration file for fastq screen
   - [gnu parallel](https://www.gnu.org/software/parallel/)
   - [bowtie](https://bowtie-bio.sourceforge.net/index.shtml)
   - [fastq_screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
