@@ -121,7 +121,7 @@ SNP calling requirements:
   - Minimum Minor Allele Frequency = 0.05
   - Minimum Mapping Quality = 30
   - SNP p-value = 1e-6
-  ```
+  ```sh
   bash bash_code/genotype.pipeline \
     $(pwd)/variant_calling/genotyping \
     $(pwd)/genome/acerv_genome.fasta \
